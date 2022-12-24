@@ -13,6 +13,7 @@ import Register from './Screens/Register';
 import CustomSidebarMenu from './Components/SideMenuView';
 import Question_Details from './Screens/Ques/Question_Details';
 import Admin from './Screens/Admin/Admin';
+import Addcontent from './Screens/Admin/Addcontent';
 
 const Drawer = createDrawerNavigator();
 
@@ -55,6 +56,10 @@ const App = () => {
           <Drawer.Screen
             name='Admin' 
             component={ Admin } 
+          />
+          <Drawer.Screen
+            name='Addcontent' 
+            component={ Addcontent } 
           />
           <Drawer.Screen
             name='Login' 

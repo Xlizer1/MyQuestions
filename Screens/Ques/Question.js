@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { deleteQuestionURI } from '../../Utility/APIs';
+import { deleteQuestionsURI } from '../config';
 
 const Question = ({ item }) => {
   const [admin, setAdmin] = useState(Boolean);
@@ -28,11 +28,12 @@ const Question = ({ item }) => {
     try {
       const config = {
         headers: {
-          Authorization: token
+          'Authorization': JSON.parse(token),
+          'Content-Type': 'application/json'
         }
-      }
+      };
 
-      await axios.delete(`${deleteQuestionURI}/${id}`, config).then( (res) => {
+      await axios.delete(`${ deleteQuestionsURI }/${ id }`, config).then( (res) => {
         console.log(res.data)
       })
     } catch (error) {
@@ -47,7 +48,7 @@ const Question = ({ item }) => {
   return (
     <View style={{ backgroundColor: '#f5f5f5' , borderRadius: 18, marginBottom: 10}}>
       <TouchableOpacity style={ styles.question } onPress={ questionDetails }>
-        <Text style={ styles.ques }>{item._id}</Text>
+        <Text style={ styles.ques }>{item.title}</Text>
         <Text style={ styles.ans }>{item.answer}</Text>
         <View style={ styles.border }></View>
         <Text style={ styles.yesr }>{item.keyWord}</Text>

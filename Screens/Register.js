@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, TextInput } from 'react-native'
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { registerURI } from '../Utility/APIs';
-import Lottie from 'lottie-react-native'
+import Lottie from 'lottie-react-native';
+import { registerURI } from './config';
 
 const Register = () => {
   const navigation = useNavigation();

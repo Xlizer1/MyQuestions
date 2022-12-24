@@ -10,12 +10,12 @@ import React, { useState, useEffect } from 'react'
 import { ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { deleteNewsURI, newsURI } from './config';
 import { Feather } from '@expo/vector-icons';
 import Lottie from 'lottie-react-native'
 
 import Header from '../Components/Header';
 
+import { deleteNewsURI, newsURI } from './config';
 
 const Home = ({ navigation }) => {
   const [news, setNews] = useState([]);
@@ -47,21 +47,22 @@ const Home = ({ navigation }) => {
   }
 
   const deleteNews = async(id) => {
-    const token = await AsyncStorage.getItem('token')
-    try {
-      const config = {
-        headers: {
-          Authorization: token
-        }
-      }
+    const token = await AsyncStorage.getItem('token');
 
-      await axios.delete(`${deleteNewsURI}/${id}`, config).then( (res) => {
-        console.log(res.data)
-      })
-    } catch (error) {
-      console.log(error)
-    }
+    const config = {
+      headers: {
+        'Authorization': JSON.parse(token),
+      }
+    };
+
+    axios.delete(`${deleteNewsURI}/${id}`, config).then((res) => {
+      alert(res.data);
+    }).catch((e) => {
+      console.log(e);
+    });
+    setLoading(false);
   }
+
 
   useEffect(() => {
     validateUser();
@@ -86,15 +87,15 @@ const Home = ({ navigation }) => {
             keyExtractor={(item, index) => index}
             contentContainerStyle={{ paddingBottom: 200 }}
             renderItem={({item}) => {
-              if(item.image.length > 2) {
+              if(item.image) {
                 return (
                   <View style={ styles.question }>
                     <Image source={{uri: item.image}} style={ styles.image } />
                     <Text style={ styles.content }>{item.title}</Text>
                     {admin ? 
                       <View style={ styles.AdminButtons }>
-                        <TouchableOpacity style={ styles.button1 }><Text style={{ fontSize: 18, fontWeight: 'bold' }}>حذف</Text></TouchableOpacity>
-                        <TouchableOpacity style={ styles.button2 }><Text style={{ fontSize: 18, fontWeight: 'bold' }}>تعديل</Text></TouchableOpacity>
+                        <TouchableOpacity style={ styles.button1 } onPress={ () => deleteNews(item._id) }><Text style={{ fontSize: 18, fontWeight: 'bold' }}>حذف</Text></TouchableOpacity>
+                        <TouchableOpacity style={ styles.button2 } onPress={ () => navigation.navigate('Admin', item) }><Text style={{ fontSize: 18, fontWeight: 'bold' }}>تعديل</Text></TouchableOpacity>
                       </View> : <></>
                     }
                   </View>
@@ -105,8 +106,8 @@ const Home = ({ navigation }) => {
                     <Text style={ styles.content }>{item.title}</Text>
                     {admin ? 
                       <View style={ styles.AdminButtons }>
-                        <TouchableOpacity style={ styles.button1 } onPress={ () => deleteNews(item._id) }><Text style={{ fontSize: 18, fontWeight: 'bold' }}>حذف</Text></TouchableOpacity>
-                        <TouchableOpacity style={ styles.button2 }><Text style={{ fontSize: 18, fontWeight: 'bold' }}>تعديل</Text></TouchableOpacity>
+                        <TouchableOpacity style={ styles.button1 } onPress={ () => deleteNews(item._id) }>{ loading? <Lottie source={require('../assets/loadingButton.json')} autoPlay loop/> : <Text style={{ fontSize: 18, fontWeight: 'bold' }}>حذف</Text>}</TouchableOpacity>
+                        <TouchableOpacity style={ styles.button2 } onPress={ () => navigation.navigate('Admin', item) }><Text style={{ fontSize: 18, fontWeight: 'bold' }}>تعديل</Text></TouchableOpacity>
                       </View> : <></>
                     }
                   </View>

@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import React from 'react';
 
 import Header from '../Components/Header';
-import Footer from '../Components/Footer';
 
 const Courses = ({ navigation }) => {
   return (

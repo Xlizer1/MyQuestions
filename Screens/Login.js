@@ -12,11 +12,10 @@ import {
 
 import { useNavigation } from '@react-navigation/native';
 
-import { loginURI } from '../Utility/APIs'
-
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Lottie from 'lottie-react-native'
+import { loginURI } from './config';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -55,6 +54,8 @@ const Login = () => {
             const rowMsg = data.msg;
             const msg = JSON.stringify(rowMsg);
             await AsyncStorage.setItem("msg", msg);
+          } else {
+            await AsyncStorage.removeItem("msg");
           }
           try {
             await AsyncStorage.setItem("token", token);

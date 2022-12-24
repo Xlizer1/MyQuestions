@@ -7,7 +7,8 @@ import Footer from '../../Components/Footer';
 import Question from './Question.js';
 import Lottie from 'lottie-react-native';
 import axios from 'axios';
-import { questionsURI } from '../../Utility/APIs';
+import { questionsURI } from '../config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Questions = ({ navigation }) => {
   const [data, setData] = useState([
@@ -20,9 +21,10 @@ const Questions = ({ navigation }) => {
   ])
 
   const [filteredQuestions, setFilteredQuestions] = useState([]);
+  
   const [loading, setLoading] = useState(true);
 
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState('');
 
   const fetchQuestions = async() => {
     const data = await axios.get(questionsURI);

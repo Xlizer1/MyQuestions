@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     SafeAreaView,
     View,
@@ -21,13 +21,33 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CustomSidebarMenu = (props) => {
+  const [admin, setAdmin] = useState(Boolean);
   const navigation = useNavigation();
 
-    const logout = () => {
-      AsyncStorage.removeItem('token');
-      AsyncStorage.removeItem('msg');
+    const logout = async () => {
+      await AsyncStorage.removeItem('token');
+      await AsyncStorage.removeItem('msg');
       navigation.navigate('Login');
     };
+
+    const validateUser = async () => {
+      const token = await AsyncStorage.getItem('token');
+      const msg = await AsyncStorage.getItem('msg');
+      if(!token){
+        navigation.navigate('Login')
+      } else {
+        if(msg) {
+          setAdmin(true);
+        } else {
+          setAdmin(false);
+        }
+      }
+    }
+
+    useEffect(() => {
+      validateUser()
+    }, [admin]);
+    
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={{ marginTop: 30, alignItems: 'center' }}>
@@ -43,6 +63,10 @@ const CustomSidebarMenu = (props) => {
                   <Text style={ styles.menuText }>الاسئلة</Text>
                   <MaterialCommunityIcons name="frequently-asked-questions" size={24} color="black" />
                 </TouchableOpacity>
+                {!admin? <></> :<TouchableOpacity style={ styles.menuContent } onPress={() => navigation.navigate('Addcontent')}>
+                  <Text style={ styles.menuText }>صفحة الادمن</Text>
+                  <AntDesign name="user" size={24} color="black" />
+                </TouchableOpacity> }
                 <TouchableOpacity style={ styles.menuContent }>
                   <Text style={ styles.menuText }>قييم التطبيق</Text>
                   <AntDesign name="star" size={24} color="black" />
