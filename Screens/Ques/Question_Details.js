@@ -1,9 +1,19 @@
-import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, Linking } from 'react-native'
 import Header from '../../Components/Header'
 import { ScrollView } from 'react-native-gesture-handler';
 
 export default function Question_Details({ route }) {
     const item = route.params.item;
+
+    const openYoutube = () => {
+        Linking.canOpenURL(item.youtubeLink).then(supported => {
+            if (supported) {
+                Linking.openURL(item.youtubeLink);
+            } else {
+                Linking.openURL(item.youtubeLink);
+            }
+        });
+    };
 
     return (
     <ImageBackground source={require('../../assets/Bg.png')} style={"flex:1"}>
@@ -25,7 +35,7 @@ export default function Question_Details({ route }) {
                 </View>
                 <View style={ styles.border }></View>
                 <View style={styles.element}>
-                    {item.youtubeLink ?<TouchableOpacity style={ styles.button }><Text style={{ fontSize: 18, fontWeight: 'bold'}}>شاهد شرح السؤال</Text></TouchableOpacity> : <></>}
+                    {item.youtubeLink.length > 10?<TouchableOpacity style={ styles.button } onPress={ openYoutube }><Text style={{ fontSize: 18, fontWeight: 'bold'}}>شاهد شرح السؤال</Text></TouchableOpacity> : <></>}
                 </View>
             </ScrollView>
         </View>
@@ -49,7 +59,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         color: '#f5f5f5',
-        marginTop: 10,
+        marginTop: 10, 
     }, 
     element: {
       paddingBottom: 10,

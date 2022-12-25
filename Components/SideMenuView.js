@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
     SafeAreaView,
     View,
@@ -21,8 +21,8 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CustomSidebarMenu = (props) => {
-  const [admin, setAdmin] = useState(Boolean);
-  const navigation = useNavigation();
+    const [admin, setAdmin] = useState(Boolean);
+    const navigation = useNavigation();
 
     const logout = async () => {
       await AsyncStorage.removeItem('token');
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     menuText:{
       fontSize:19,
       width: 150,
-      textAlign: 'left',
+      textAlign: 'left'
     },
 });
 

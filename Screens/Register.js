@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginBottom: 20,
     fontSize: 20,
-    textAlign: 'right'
+    textAlign: 'right',
   },
   button:{
     width: 150,

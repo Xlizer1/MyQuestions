@@ -48,12 +48,9 @@ const Login = () => {
         if(!data.token){
           alert(data);
         } else {
-          const rowToken = data.token;
-          const token = JSON.stringify(rowToken);
+          const token = JSON.stringify(data.token);
           if(data.msg) {
-            const rowMsg = data.msg;
-            const msg = JSON.stringify(rowMsg);
-            await AsyncStorage.setItem("msg", msg);
+            await AsyncStorage.setItem("msg", JSON.stringify(data.msg));
           } else {
             await AsyncStorage.removeItem("msg");
           }
@@ -79,7 +76,7 @@ const Login = () => {
       <View style={styles.container}>
         <Image source={require('../assets/Logo.png')} style={ styles.logo }/>
         <View style={ styles.mainView }>
-          <Text style={{ fontSize: 32, fontWeight: 'bold', marginBottom: 30, color: '#f5f5f5'}}>تسجيل الدخول</Text>
+          <Text style={{ fontSize: 32, fontWeight: 'bold', marginBottom: 30, color: '#f5f5f5' }}>تسجيل الدخول</Text>
           <TextInput 
             placeholder='البريد الالكتروني'
             placeholderTextColor={'#f5f5f5'}
@@ -96,7 +93,7 @@ const Login = () => {
             secureTextEntry={true}
           />
           <TouchableOpacity style={ styles.button } onPress={ login }>{loading? <Lottie  source={require('../assets/loadingButton.json')} autoPlay loop/> : <Text style={ styles.buttonText }>تسجيل الدخول</Text> }</TouchableOpacity>
-          <View style={{ flexDirection: 'row'}}><Text style={{ fontWeight: 'bold', marginRight: 3}} onPress={ navigateToRegister }>تسجيل</Text><Text>لديك حساب؟</Text></View>
+          <View style={{ flexDirection: 'row'}}><Text style={{ fontWeight: 'bold', marginRight: 3 }} onPress={ navigateToRegister }>تسجيل</Text><Text>لديك حساب؟</Text></View>
         </View>
       </View>
     </ImageBackground>

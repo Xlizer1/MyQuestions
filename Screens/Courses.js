@@ -11,7 +11,6 @@ const Courses = ({ navigation }) => {
           <View style={ styles.mainView}>
             <Text>Courses</Text>
           </View>
-        <Footer navigation={navigation}/>
       </View>
     </ImageBackground>
   )

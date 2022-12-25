@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import React from 'react';
 
 import Header from '../Components/Header';
-import Footer from '../Components/Footer';
 
 const AcceptaionGrades = ({ navigation }) => {
   return (
@@ -12,7 +11,6 @@ const AcceptaionGrades = ({ navigation }) => {
           <View style={ styles.mainView}>
             <Text>AcceptaionGrades</Text>
           </View>
-        <Footer navigation={navigation}/>
       </View>
     </ImageBackground>
   )

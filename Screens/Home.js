@@ -18,9 +18,11 @@ import Header from '../Components/Header';
 import { deleteNewsURI, newsURI } from './config';
 
 const Home = ({ navigation }) => {
+
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [admin, setAdmin] = useState(Boolean);
+
 
   const fetchNews = async() => {
     const data = await axios.get(newsURI);

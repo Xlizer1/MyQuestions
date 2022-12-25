@@ -3,14 +3,13 @@ import React, { useState, useEffect } from 'react';
 
 import Header from '../../Components/Header';
 import { Feather } from '@expo/vector-icons';
-import Footer from '../../Components/Footer';
 import Question from './Question.js';
 import Lottie from 'lottie-react-native';
 import axios from 'axios';
 import { questionsURI } from '../config';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Questions = ({ navigation }) => {
+
   const [data, setData] = useState([
     {
       id: '',
@@ -82,7 +81,6 @@ const Questions = ({ navigation }) => {
                 />}
               </View>
             </View>
-            <Footer navigation={ navigation }/>
         </View>
       </ImageBackground>
   )
@@ -111,7 +109,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     direction:'rtl',
     textAlign:'right',
-    display:'flex',
+    display:'flex', 
   },
   searchView:{
     backgroundColor: '#f5f5f5',

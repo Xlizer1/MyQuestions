@@ -1,9 +1,8 @@
-import { StyleSheet, View, ImageBackground, Text, TextInput, Image, Alert, TouchableOpacity, ActivityIndicator, Button } from 'react-native'
+import { StyleSheet, View, ImageBackground, Text, TextInput, Image, TouchableOpacity, ActivityIndicator, Button } from 'react-native'
 import Header from '../../Components/Header'
 import { useState } from 'react';
-import Lottie from 'lottie-react-native'
 import * as ImagePicker from 'expo-image-picker';
-import { firebase, app } from '../../firebaseConfig'
+import { firebase} from '../../firebaseConfig'
 import axios from 'axios';
 import { updateNewsURI } from '../config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -111,7 +110,7 @@ export default function Admin({ route }) {
               value= { news.title }
             />
             {image && <Image source={{uri: image}} style={{width: 170 , height: 200}}/>}
-            <TouchableOpacity onPress={ pickImage }><Text>تحميل صوره</Text></TouchableOpacity>
+            <TouchableOpacity onPress={ pickImage }><Text style={{}}>تحميل صوره</Text></TouchableOpacity>
             {!uploading ? <Button title='Upload Image' onPress={ uploadImage } />: <ActivityIndicator size={'small'} color='black' />}
           </View>
         </View>

@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import React from 'react';
 
 import Header from '../Components/Header';
-import Footer from '../Components/Footer';
 
 const Desitions = ({ navigation }) => {
   return (
@@ -12,7 +11,6 @@ const Desitions = ({ navigation }) => {
           <View style={ styles.mainView}>
             <Text>Desitions</Text>
           </View>
-        <Footer navigation={navigation}/>
       </View>
     </ImageBackground>
   )

@@ -84,14 +84,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
     textAlign: 'right',
     direction: 'ltr',
-    marginTop: 10,
+    marginTop: 10, 
   },
   yesr: {
     color: 'black',
     fontSize: 10,
     direction: 'ltr',
     textAlign: 'right',
-    marginTop: 10,
+    marginTop: 10, 
   },
   border: {
     borderTopWidth: 1,

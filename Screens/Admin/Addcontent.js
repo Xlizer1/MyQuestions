@@ -1,6 +1,6 @@
-import { StyleSheet, View, ImageBackground, Text, TextInput, Image, TouchableOpacity, ActivityIndicator, Button, ScrollView } from 'react-native';
+import { StyleSheet, View, ImageBackground, Text, TextInput, Image, TouchableOpacity, ActivityIndicator, ScrollView, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { firebase, app } from '../../firebaseConfig';
+import { firebase } from '../../firebaseConfig';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
@@ -8,6 +8,7 @@ import { addNewsURI, addQuestionsURI } from '../config';
 import Header from '../../Components/Header';
 
 const Addcontent = () => {
+
     const [question, setQuestion] = useState({
         title: '',
         answer: '',
@@ -87,7 +88,7 @@ const Addcontent = () => {
                 }
             };
 
-            await axios.post('https://my-questions-server.onrender.com/admin/news/new', data, config)
+            await axios.post(addNewsURI, data, config)
             .then((res) => {
                 console.log(res);
             }).catch((e) => {
@@ -171,9 +172,7 @@ const Addcontent = () => {
 
         await axios.post(addQuestionsURI, data, config)
         .then((res) => {
-            console.log(res.data);
-        }).catch((e) => {
-            console.log(e);
+            alert(res.data);
         })
     }
 
@@ -191,6 +190,8 @@ const Addcontent = () => {
                         style={ styles.input }
                         onChangeText={ (text) => handelQuestionTitleChange(text) }
                         value={ question.title }
+                        multiline= { true }
+                        
                     />
                     <TextInput 
                         placeholder='الاجابة'
@@ -225,9 +226,9 @@ const Addcontent = () => {
                         style={ styles.input }
                         onChangeText={ (text) => handelNewsChange(text) }
                         value={ news.title }
+                        multiline= { true }
                     />
                     {!uploading ? <TouchableOpacity style={ styles.button1 } onPress={ addNews }><Text style={{ fontWeight: 'bold', fontSize: 18}}>إضافة الخبر</Text></TouchableOpacity>: <ActivityIndicator size={'small'} color='black' />}
-            
                 </View>
               </ScrollView>
             </View>

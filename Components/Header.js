@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native'
+import React from 'react'
 
 import { Ionicons } from '@expo/vector-icons';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
