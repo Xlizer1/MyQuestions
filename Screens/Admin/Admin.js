@@ -2,9 +2,9 @@ import { StyleSheet, View, ImageBackground, Text, TextInput, Image, TouchableOpa
 import Header from '../../Components/Header'
 import { useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
-import { firebase} from '../../firebaseConfig'
+import { firebase} from '../../utilities/firebaseConfig'
 import axios from 'axios';
-import { updateNewsURI } from '../config';
+import { updateNewsURI } from '../../utilities/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Admin({ route }) {

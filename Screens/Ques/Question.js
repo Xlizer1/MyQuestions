@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { deleteQuestionsURI } from '../config';
+import { deleteQuestionsURI } from '../../utilities/config';
 
 const Question = ({ item }) => {
   const [admin, setAdmin] = useState(Boolean);

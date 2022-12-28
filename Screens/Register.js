@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity, TextI
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Lottie from 'lottie-react-native';
-import { registerURI } from './config';
+import { registerURI } from '../utilities/config';
 
 const Register = () => {
   const navigation = useNavigation();

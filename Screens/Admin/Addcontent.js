@@ -1,10 +1,10 @@
 import { StyleSheet, View, ImageBackground, Text, TextInput, Image, TouchableOpacity, ActivityIndicator, ScrollView, Alert } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { firebase } from '../../firebaseConfig';
+import { firebase } from '../../utilities/firebaseConfig';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from 'react';
-import { addNewsURI, addQuestionsURI } from '../config';
+import { addNewsURI, addQuestionsURI } from '../../utilities/config';
 import Header from '../../Components/Header';
 
 const Addcontent = () => {

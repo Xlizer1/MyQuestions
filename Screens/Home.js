@@ -15,7 +15,7 @@ import Lottie from 'lottie-react-native'
 
 import Header from '../Components/Header';
 
-import { deleteNewsURI, newsURI } from './config';
+import { deleteNewsURI, newsURI } from '../utilities/config';
 
 const Home = ({ navigation }) => {
 

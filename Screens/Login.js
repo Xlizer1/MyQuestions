@@ -15,7 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Lottie from 'lottie-react-native'
-import { loginURI } from './config';
+import { loginURI } from '../utilities/config';
 
 const Login = () => {
   const navigation = useNavigation();

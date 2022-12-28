@@ -6,7 +6,7 @@ import { Feather } from '@expo/vector-icons';
 import Question from './Question.js';
 import Lottie from 'lottie-react-native';
 import axios from 'axios';
-import { questionsURI } from '../config';
+import { questionsURI } from '../../utilities/config';
 
 const Questions = ({ navigation }) => {
 
