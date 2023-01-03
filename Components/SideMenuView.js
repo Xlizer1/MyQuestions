@@ -81,14 +81,6 @@ const CustomSidebarMenu = (props) => {
             </TouchableOpacity>
           )}
           <TouchableOpacity style={styles.menuContent}>
-            <Text style={styles.menuText}>قييم التطبيق</Text>
-            <AntDesign name="star" size={24} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.menuContent}>
-            <Text style={styles.menuText}>شارك التطبيق</Text>
-            <Feather name="share-2" size={24} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.menuContent}>
             <Text style={styles.menuText}>تواصل معنا</Text>
             <Ionicons name="ios-call-outline" size={24} color="black" />
           </TouchableOpacity>

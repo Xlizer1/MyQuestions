@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ScrollView,
+  Platform,
 } from "react-native";
 
 import axios from "axios";
@@ -226,7 +227,18 @@ const Addcontent = () => {
             <TextInput
               placeholder="السؤال"
               placeholderTextColor={"#616161"}
-              style={styles.input}
+              style={{
+                height: 50,
+                width: "100%",
+                color: "#616161",
+                borderRadius: 10,
+                backgroundColor: "#f5f5f5",
+                marginBottom: 20,
+                fontSize: 20,
+                textAlign: "right",
+                paddingRight: 10,
+                paddingTop: Platform.OS === "ios" ? 12 : 0,
+              }}
               onChangeText={(text) => handelQuestionTitleChange(text)}
               value={question.title}
               multiline={true}
@@ -266,6 +278,7 @@ const Addcontent = () => {
                 fontSize: 26,
                 fontWeight: "bold",
                 color: "#f5f5f5",
+                textAlign: "center",
               }}
             >
               إضافة خبر
@@ -277,7 +290,7 @@ const Addcontent = () => {
               />
             )}
             <TouchableOpacity onPress={pickImage} style={styles.button2}>
-              <Text>إختيار صورة</Text>
+              <Text style={{ textAlign: "center" }}>إختيار صورة</Text>
             </TouchableOpacity>
             <TextInput
               placeholder="العنوان"
@@ -320,6 +333,7 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     borderBottomColor: "#f5f5f5",
     borderBottomWidth: 1,
+    alignItems: "center",
   },
   input: {
     height: 50,

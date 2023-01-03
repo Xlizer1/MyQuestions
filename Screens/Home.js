@@ -37,7 +37,7 @@ const Home = ({ navigation }) => {
     const token = await AsyncStorage.getItem("token");
     const msg = await AsyncStorage.getItem("msg");
     if (!token) {
-      navigation.navigate("Login");
+      navigation.navigate("Login") || navigation.navigate("Register");
     } else {
       if (msg) {
         setAdmin(true);
@@ -70,7 +70,7 @@ const Home = ({ navigation }) => {
   useEffect(() => {
     validateUser();
     fetchNews();
-  }, [news]);
+  }, []);
 
   return (
     <ImageBackground

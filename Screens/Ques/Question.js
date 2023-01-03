@@ -36,7 +36,7 @@ const Question = ({ item }) => {
       };
 
       await axios.delete(`${deleteQuestionsURI}/${id}`, config).then((res) => {
-        console.log(res.data);
+        alert(res.data);
       });
     } catch (error) {
       console.log(error);

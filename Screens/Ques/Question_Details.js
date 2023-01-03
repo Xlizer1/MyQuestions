@@ -96,11 +96,10 @@ const styles = StyleSheet.create({
     borderColor: "#f5f5f5",
     padding: 5,
     marginBottom: 20,
-    borderStyle: "dashed",
   },
   button: {
     backgroundColor: "#f5f5f5",
-    width: 140,
+    width: 150,
     height: 60,
     borderRadius: 18,
     justifyContent: "center",
