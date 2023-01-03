@@ -7,12 +7,14 @@ import {
   ImageBackground,
   TouchableOpacity,
   TextInput,
+  ScrollView,
 } from "react-native";
 
 import Lottie from "lottie-react-native";
 import { useNavigation } from "@react-navigation/native";
-
+import axios from "axios";
 import { registerURI } from "../utilities/config";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Register = () => {
   const navigation = useNavigation();
@@ -23,7 +25,7 @@ const Register = () => {
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(Boolean);
 
   const handelFirstNameChange = (text) => {
     setUser({
@@ -54,21 +56,20 @@ const Register = () => {
   };
 
   const register = () => {
+    setLoading(true);
     axios
       .post(registerURI, user)
       .then((res) => {
-        setLoading(true);
-        const data = res.data;
-        if (!data.token) {
-          alert(data);
+        if (res.status === 200) {
+          navigation.navigate("Login");
         } else {
-          AsyncStorage.setItem("token", data.token);
-          navigation.navigate("Home");
+          alert(res.data);
         }
       })
       .catch((e) => {
         console.log(e);
       });
+    setLoading(false);
   };
 
   const navigateToLogin = () => {
@@ -77,7 +78,7 @@ const Register = () => {
 
   return (
     <ImageBackground source={require("../assets/Bg.png")} style={"flex:1"}>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Image source={require("../assets/Logo.png")} style={styles.logo} />
         <View style={styles.mainView}>
           <Text
@@ -86,6 +87,7 @@ const Register = () => {
               fontWeight: "bold",
               marginBottom: 30,
               color: "#f5f5f5",
+              alignSelf: "center",
             }}
           >
             تسجيل
@@ -117,6 +119,7 @@ const Register = () => {
             onChangeText={(text) => handelPasswordChange(text)}
             style={styles.input}
             value={user.password}
+            secureTextEntry={true}
           />
           <TouchableOpacity style={styles.button} onPress={register}>
             {loading ? (
@@ -129,7 +132,13 @@ const Register = () => {
               <Text style={styles.buttonText}>تسجيل</Text>
             )}
           </TouchableOpacity>
-          <View style={{ flexDirection: "row" }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              alignSelf: "center",
+            }}
+          >
             <Text
               style={{ fontWeight: "bold", marginRight: 3 }}
               onPress={navigateToLogin}
@@ -139,7 +148,7 @@ const Register = () => {
             <Text>لديك حساب؟</Text>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </ImageBackground>
   );
 };
@@ -149,16 +158,17 @@ export default Register;
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    alignItems: "center",
     paddingTop: 50,
   },
   logo: {
     width: 150,
     height: 150,
+    alignSelf: "center",
   },
   mainView: {
-    alignItems: "center",
     width: "80%",
+    alignSelf: "center",
+    paddingBottom: 100,
   },
   input: {
     height: 50,
@@ -179,10 +189,12 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     justifyContent: "center",
     alignItems: "center",
+    alignSelf: "center",
   },
   buttonText: {
     color: "#40514E",
     fontWeight: "bold",
     fontSize: 20,
+    alignSelf: "center",
   },
 });
