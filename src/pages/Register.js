@@ -76,7 +76,7 @@ const Register = () => {
             onPress={async () => {
               await register(firstName, lastName, email, password);
               navigation.navigate("Login");
-              alert("سجل الدخول باستخدام البريد الاكتروني مره اخرى");
+              alert("سجل الدخول باستخدام البريد الاكتروني الذي ادخلته");
             }}>
             <Text style={styles.buttonText}>تسجيل</Text>
           </TouchableOpacity>

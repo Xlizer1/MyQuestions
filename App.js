@@ -1,4 +1,4 @@
-import {Provider} from "./src/context/Provider";
+import Provider from "./src/context/Provider";
 import Navigation from "./src/Navigation";
 
 const App = () => {

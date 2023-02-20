@@ -16,8 +16,6 @@ const Drawer = createDrawerNavigator();
 const Navigation = () => {
   const {userInfo} = useContext(Context);
 
-  console.log(userInfo);
-
   return (
     <NavigationContainer>
       <Drawer.Navigator

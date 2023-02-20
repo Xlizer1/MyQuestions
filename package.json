@@ -13,9 +13,11 @@
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-navigation/drawer": "^6.5.7",
     "@react-navigation/native": "^6.1.2",
+    "@rnx-kit/metro-plugin-cyclic-dependencies-detector": "^1.1.0",
     "axios": "^1.2.3",
     "firebase": "^9.16.0",
     "lottie-react-native": "^5.1.4",
+    "mock-async-storage": "^2.2.0",
     "react": "18.1.0",
     "react-native": "0.70.6",
     "react-native-dropdown-select-list": "^2.0.4",
@@ -37,6 +39,16 @@
     "react-test-renderer": "18.1.0"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "setupFiles": [
+      "./setupTests.js",
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)|@react-native-async-storage/async-storage"
+    ],
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
   }
 }

@@ -20,7 +20,7 @@ import AnimatedLottieView from "lottie-react-native";
 
 const Home = () => {
   const navigation = useNavigation();
-  const {userInfo, deleteNews} = useContext(Context);
+  const {deleteNews, userInfo} = useContext(Context);
 
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -30,9 +30,15 @@ const Home = () => {
     const data = await axios.get(newsURI);
     setNews(data.data);
     setLoading(false);
-    if (!userInfo.msg) return;
-    setAdmin(true);
   };
+
+  function checkAdmin() {
+    if (userInfo.msg) {
+      setAdmin(true);
+    } else {
+      setAdmin(false);
+    }
+  }
 
   const handelSearch = () => {
     navigation.navigate("Questions");
@@ -40,6 +46,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchNews();
+    checkAdmin();
   }, [news]);
 
   return (

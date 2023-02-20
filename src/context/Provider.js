@@ -11,8 +11,8 @@ import {ReloadInstructions} from "react-native/Libraries/NewAppScreen";
 
 export const Context = createContext();
 
-export const Provider = ({children}) => {
-  const [userInfo, setUserInfo] = useState({});
+export default Provider = ({children}) => {
+  let [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [splashLoading, setSplashLoading] = useState(false);
 
@@ -26,9 +26,10 @@ export const Provider = ({children}) => {
         email,
         password,
       })
-      .then(res => {
-        setUserInfo(res.data);
-        AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
+      .then(async res => {
+        let userInfo = res.data;
+        setUserInfo(userInfo);
+        await AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
       })
       .catch(e => {
@@ -46,22 +47,22 @@ export const Provider = ({children}) => {
         email,
         password,
       })
-      .then(res => {
-        setUserInfo(res.data);
-        AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
+      .then(async res => {
+        let userInfo = res.data;
+        setUserInfo(userInfo);
+        await AsyncStorage.setItem("userInfo", JSON.stringify(userInfo));
         setIsLoading(false);
       })
       .catch(e => {
         console.log(`login error ${e}`);
-        alert("البريد الالكتروني او كلمة المرور خاطئة");
+        alert("كلمة المرور غير صحيحة");
         setIsLoading(false);
       });
   };
 
-  const logout = () => {
+  const logout = async () => {
     setIsLoading(true);
-    AsyncStorage.removeItem("userInfo");
-    setUserInfo({});
+    await AsyncStorage.removeItem("userInfo");
     setIsLoading(false);
   };
 
@@ -71,7 +72,6 @@ export const Provider = ({children}) => {
 
       let userInfo = await AsyncStorage.getItem("userInfo");
       userInfo = JSON.parse(userInfo);
-      console.log(userInfo);
 
       if (userInfo) {
         setUserInfo(userInfo);
@@ -159,18 +159,13 @@ export const Provider = ({children}) => {
       const snapshot = ref.put(blob);
       snapshot.on(
         firebase.storage.TaskEvent.STATE_CHANGED,
-        () => {
-          setUploading(true);
-        },
         error => {
-          setUploading(false);
           console.log(error);
           blob.close();
           return;
         },
         () => {
           snapshot.snapshot.ref.getDownloadURL().then(url => {
-            setUploading(false);
             setImage(url);
             blob.close();
             return url;

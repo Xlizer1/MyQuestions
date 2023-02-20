@@ -23,9 +23,16 @@ const SideMenuView = props => {
     logout();
   };
 
+  function checkAdmin() {
+    if (userInfo.msg) {
+      setAdmin(true);
+    } else {
+      setAdmin(false);
+    }
+  }
+
   useEffect(() => {
-    if (!userInfo.msg) return;
-    setAdmin(true);
+    checkAdmin();
   }, [userInfo]);
 
   return (
