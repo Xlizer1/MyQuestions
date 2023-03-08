@@ -1,213 +1,315 @@
-import React, {useState, useEffect, useContext} from "react";
+import {useNavigation} from "@react-navigation/native";
+import React from "react";
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
-  FlatList,
+  ScrollView,
   Image,
-  Dimensions,
-  ImageBackground,
 } from "react-native";
-
-import axios from "axios";
+import {Shadow} from "react-native-shadow-2";
 
 import Header from "../components/Header";
-import {newsURI} from "../utilities/config";
-import {useNavigation} from "@react-navigation/native";
-import {Context} from "../context/Provider";
-import AnimatedLottieView from "lottie-react-native";
 
 const Home = () => {
   const navigation = useNavigation();
-  const {deleteNews, userInfo} = useContext(Context);
-
-  const [news, setNews] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [admin, setAdmin] = useState(Boolean);
-
-  const fetchNews = async () => {
-    const data = await axios.get(newsURI);
-    setNews(data.data);
-    setLoading(false);
-  };
-
-  function checkAdmin() {
-    if (userInfo.msg) {
-      setAdmin(true);
-    } else {
-      setAdmin(false);
-    }
-  }
-
-  const handelSearch = () => {
-    navigation.navigate("Questions");
-  };
-
-  useEffect(() => {
-    fetchNews();
-    checkAdmin();
-  }, [news]);
-
   return (
-    <ImageBackground
-      source={require("../../assets/Bg.png")}
-      style={styles.imageBackground}>
-      <View style={styles.container}>
-        <Header />
-        <TouchableOpacity onPressOut={handelSearch}>
-          <View style={styles.searchView}>
-            <View style={styles.searchIcon}>
-              <Image
-                source={require("../../assets/search.png")}
-                style={{
-                  height: 30,
-                  resizeMode: "contain",
-                  opacity: 0.5,
-                  margin: -20,
-                }}
-              />
-              <Text style={{fontSize: 20}}> ابحث عن سؤالك؟</Text>
-            </View>
+    <View style={styles.container}>
+      <Header />
+      <View style={{width: 370, marginVertical: 10}}>
+        <Shadow
+          distance={0}
+          startColor={"#000"}
+          endColor={"#000"}
+          offset={[-3, 13]}
+          style={{height: 50, marginBottom: 10}}>
+          <View style={styles.search}>
+            <Text
+              style={{
+                color: "#000",
+                fontWeight: "900",
+                fontSize: 20,
+                marginHorizontal: 10,
+              }}>
+              تبحث عن سؤال؟ إختر مادة : -
+            </Text>
           </View>
-        </TouchableOpacity>
-        <View style={styles.listView}>
-          {loading ? (
-            <AnimatedLottieView
-              source={require("../../assets/loading.json")}
-              autoPlay
-              loop
-              style={styles.loading}
-            />
-          ) : (
-            <FlatList
-              data={news}
-              keyExtractor={(item, index) => index}
-              contentContainerStyle={{paddingBottom: 200}}
-              renderItem={({item}) => {
-                if (item.image) {
-                  return (
-                    <View style={styles.question}>
-                      <Image source={{uri: item.image}} style={styles.image} />
-                      <Text style={styles.content}>{item.title}</Text>
-                      {admin ? (
-                        <View style={styles.AdminButtons}>
-                          <TouchableOpacity
-                            style={styles.button}
-                            onPress={() => deleteNews(item._id)}>
-                            <Text style={{fontSize: 18, fontWeight: "bold"}}>
-                              حذف
-                            </Text>
-                          </TouchableOpacity>
-                        </View>
-                      ) : (
-                        <></>
-                      )}
-                    </View>
-                  );
-                } else {
-                  return (
-                    <View style={styles.question}>
-                      <Text style={styles.content}>{item.title}</Text>
-                      {admin ? (
-                        <View style={styles.AdminButtons}>
-                          <TouchableOpacity
-                            style={styles.button}
-                            onPress={() => deleteNews(item._id)}>
-                            <Text style={{fontSize: 18, fontWeight: "bold"}}>
-                              حذف
-                            </Text>
-                          </TouchableOpacity>
-                        </View>
-                      ) : (
-                        <></>
-                      )}
-                    </View>
-                  );
-                }
-              }}
-            />
-          )}
-        </View>
+        </Shadow>
       </View>
-    </ImageBackground>
+      <ScrollView>
+        <View style={{width: "100%", alignItems: "center"}}>
+          <View
+            style={{
+              flexDirection: "row-reverse",
+              justifyContent: "space-around",
+              width: 390,
+              marginTop: 10,
+            }}>
+            <Shadow
+              distance={0}
+              startColor={"#000"}
+              endColor={"#000"}
+              offset={[-4, 4]}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Select Unit", {
+                    body: {material: "اسلامية", units: 5},
+                  })
+                }>
+                <View style={styles.subject}>
+                  <Text
+                    style={{fontSize: 20, fontWeight: "900", color: "#000"}}>
+                    إسلامية
+                  </Text>
+                  <Image
+                    source={require("../../assets/Subjects/Islamic.png")}
+                    style={{width: 40, resizeMode: "contain", marginRight: 15}}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Shadow>
+            <Shadow
+              distance={0}
+              startColor={"#000"}
+              endColor={"#000"}
+              offset={[-4, 4]}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Select Unit", {
+                    body: {
+                      material: "قواعد",
+                      units: 5,
+                    },
+                  })
+                }>
+                <View style={styles.subject}>
+                  <Text
+                    style={{fontSize: 20, fontWeight: "900", color: "#000"}}>
+                    عربي
+                  </Text>
+                  <Image
+                    source={require("../../assets/Subjects/Arabic.png")}
+                    style={{width: 40, resizeMode: "contain", marginRight: 15}}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Shadow>
+          </View>
+          <View
+            style={{
+              flexDirection: "row-reverse",
+              marginTop: 20,
+              justifyContent: "space-around",
+              width: 390,
+            }}>
+            <Shadow
+              distance={0}
+              startColor={"#000"}
+              endColor={"#000"}
+              offset={[-4, 4]}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Select Unit", {
+                    body: {
+                      material: "انكليزي",
+                      units: 8,
+                    },
+                  })
+                }>
+                <View style={styles.subject}>
+                  <Text
+                    style={{fontSize: 20, fontWeight: "900", color: "#000"}}>
+                    إنكليزي
+                  </Text>
+                  <Image
+                    source={require("../../assets/Subjects/English.png")}
+                    style={{width: 40, resizeMode: "contain", marginRight: 15}}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Shadow>
+            <Shadow
+              distance={0}
+              startColor={"#000"}
+              endColor={"#000"}
+              offset={[-4, 4]}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Select Unit", {
+                    body: {
+                      material: "اقتصاد",
+                      units: 6,
+                    },
+                  })
+                }>
+                <View style={styles.subject}>
+                  <Text
+                    style={{fontSize: 20, fontWeight: "900", color: "#000"}}>
+                    إقتصاد
+                  </Text>
+                  <Image
+                    source={require("../../assets/Subjects/Economy.png")}
+                    style={{width: 40, resizeMode: "contain", marginRight: 15}}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Shadow>
+          </View>
+          <View
+            style={{
+              flexDirection: "row-reverse",
+              marginTop: 20,
+              justifyContent: "space-around",
+              width: 390,
+            }}>
+            <Shadow
+              distance={0}
+              startColor={"#000"}
+              endColor={"#000"}
+              offset={[-4, 4]}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Select Unit", {
+                    body: {
+                      material: "احياء",
+                      units: 5,
+                    },
+                  })
+                }>
+                <View style={styles.subject}>
+                  <Text
+                    style={{fontSize: 20, fontWeight: "900", color: "#000"}}>
+                    أحياء
+                  </Text>
+                  <Image
+                    source={require("../../assets/Subjects/Biology.png")}
+                    style={{width: 40, resizeMode: "contain", marginRight: 15}}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Shadow>
+            <Shadow
+              distance={0}
+              startColor={"#000"}
+              endColor={"#000"}
+              offset={[-4, 4]}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Select Unit", {
+                    body: {
+                      material: "رياضيات",
+                      units: 6,
+                    },
+                  })
+                }>
+                <View style={styles.subject}>
+                  <Text
+                    style={{fontSize: 20, fontWeight: "900", color: "#000"}}>
+                    رياضيات
+                  </Text>
+                  <Image
+                    source={require("../../assets/Subjects/Math.png")}
+                    style={{width: 40, resizeMode: "contain", marginRight: 15}}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Shadow>
+          </View>
+          <View
+            style={{
+              flexDirection: "row-reverse",
+              marginVertical: 20,
+              justifyContent: "space-around",
+              width: 390,
+            }}>
+            <Shadow
+              distance={0}
+              startColor={"#000"}
+              endColor={"#000"}
+              offset={[-4, 4]}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Select Unit", {
+                    body: {
+                      material: "فيزياء",
+                      units: 10,
+                    },
+                  })
+                }>
+                <View style={styles.subject}>
+                  <Text
+                    style={{fontSize: 20, fontWeight: "900", color: "#000"}}>
+                    فيزياء
+                  </Text>
+                  <Image
+                    source={require("../../assets/Subjects/Physics.png")}
+                    style={{width: 40, resizeMode: "contain", marginRight: 15}}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Shadow>
+            <Shadow
+              distance={0}
+              startColor={"#000"}
+              endColor={"#000"}
+              offset={[-4, 4]}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Select Unit", {
+                    body: {
+                      material: "كيمياء",
+                      units: 8,
+                    },
+                  })
+                }>
+                <View style={styles.subject}>
+                  <Text
+                    style={{fontSize: 20, fontWeight: "900", color: "#000"}}>
+                    كيمياء
+                  </Text>
+                  <Image
+                    source={require("../../assets/Subjects/Chemistry.png")}
+                    style={{width: 40, resizeMode: "contain", marginLeft: 15}}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Shadow>
+          </View>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
 export default Home;
 
-const DeviceHeight = Math.round(Dimensions.get("window").height);
-
 const styles = StyleSheet.create({
-  imageBackground: {
-    flex: 1,
-    height: DeviceHeight,
-  },
-
   container: {
     height: "100%",
     display: "flex",
     alignItems: "center",
     paddingTop: 50,
+    backgroundColor: "#00dd80",
   },
-  searchView: {
-    backgroundColor: "#f5f2f5",
-    margin: 10,
-    height: 50,
-    borderRadius: 10,
-    marginVertical: 10,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    overflow: "hidden",
-    zIndex: 1,
-  },
-  searchIcon: {
-    height: "100%",
-    width: "100%",
-    borderRadius: 10,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  question: {
-    width: 390,
-    backgroundColor: "#f5f5f5",
-    borderRadius: 10,
-    marginVertical: 5,
-  },
-  content: {
-    color: "black",
-    fontSize: 18,
-    textAlign: "right",
-    width: "100%",
-    padding: 10,
-  },
-  image: {
-    width: "100%",
-    height: 200,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-  },
-  listView: {
-    width: "95%",
-    height: "100%",
-    alignItems: "center",
-  },
-  loading: {
-    width: 300,
-  },
-  AdminButtons: {
-    flexDirection: "row",
-  },
-  button: {
-    backgroundColor: "#FF4A4A",
-    width: "100%",
-    height: 30,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+  subject: {
+    width: 180,
+    height: 90,
+    backgroundColor: "#fff",
     justifyContent: "center",
     alignItems: "center",
+    borderColor: "#000",
+    borderWidth: 2,
+    flexDirection: "row",
+  },
+  search: {
+    height: 50,
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "#000",
+    borderWidth: 2,
+    marginTop: 10,
+    flexDirection: "row-reverse",
   },
 });

@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import {NavigationContainer} from "@react-navigation/native";
 import {createDrawerNavigator} from "@react-navigation/drawer";
 
@@ -10,6 +10,7 @@ import Questions from "./pages/Questions/Questions";
 import Question_Details from "./pages/Questions/Question_Details";
 import SideMenuView from "./components/SideMenuView";
 import {Context} from "./context/Provider";
+import SelectUnit from "./pages/SelectUnit";
 
 const Drawer = createDrawerNavigator();
 
@@ -31,6 +32,7 @@ const Navigation = () => {
             <Drawer.Screen name="Home" component={Home} />
             <Drawer.Screen name="Add Content" component={AddContnet} />
             <Drawer.Screen name="Questions" component={Questions} />
+            <Drawer.Screen name="Select Unit" component={SelectUnit} />
             <Drawer.Screen
               name="Question Details"
               component={Question_Details}

@@ -13,7 +13,10 @@ import {
 } from "react-native";
 import axios from "axios";
 import {launchImageLibrary} from "react-native-image-picker";
-import {SelectList} from "react-native-dropdown-select-list";
+import {
+  MultipleSelectList,
+  SelectList,
+} from "react-native-dropdown-select-list";
 
 import Header from "../../components/Header";
 
@@ -29,7 +32,8 @@ const AddContnet = () => {
   const [title, setTitle] = useState("");
   const [answer, setAnswer] = useState("");
   const [material, setMaterial] = useState("");
-  const [year, setYear] = useState("");
+  const [year, setYear] = useState([]);
+  const [unit, setUnit] = useState("");
   const [turn, setTurn] = useState("");
   const [youtubeLink, setYoutubeLink] = useState("");
 
@@ -136,6 +140,7 @@ const AddContnet = () => {
       material: material,
       year: year,
       turn: turn,
+      unit: unit,
       youtubeLink: youtubeLink,
     };
 
@@ -145,9 +150,14 @@ const AddContnet = () => {
       },
     };
 
-    await axios.post(addQuestionsURI, data, config).then(res => {
-      alert(res.data);
-    });
+    await axios
+      .post(addQuestionsURI, data, config)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   return (
@@ -192,7 +202,7 @@ const AddContnet = () => {
                 justifyContent: "center",
                 width: "95%",
               }}>
-              <SelectList
+              <MultipleSelectList
                 setSelected={val => setYear(val)}
                 data={[
                   {key: "1", value: ""},
@@ -208,7 +218,7 @@ const AddContnet = () => {
                 ]}
                 save="value"
                 boxStyles={{
-                  width: 100,
+                  width: 90,
                   backgroundColor: "#f5f5f5",
                   borderColor: "#f5f5f5",
                   marginVertical: 15,
@@ -221,9 +231,10 @@ const AddContnet = () => {
                   zIndex: 10,
                   top: 50,
                   backgroundColor: "#f5f5f5",
-                  width: 100,
+                  width: 90,
                   alignItems: "center",
                 }}
+                badgeStyles={{display: "none"}}
               />
               <SelectList
                 setSelected={val => setTurn(val)}
@@ -236,7 +247,7 @@ const AddContnet = () => {
                 ]}
                 save="value"
                 boxStyles={{
-                  width: 100,
+                  width: 90,
                   backgroundColor: "#f5f5f5",
                   borderColor: "#f5f5f5",
                   marginVertical: 15,
@@ -249,7 +260,7 @@ const AddContnet = () => {
                   zIndex: 10,
                   top: 50,
                   backgroundColor: "#f5f5f5",
-                  width: 100,
+                  width: 90,
                   alignItems: "center",
                 }}
               />
@@ -258,7 +269,7 @@ const AddContnet = () => {
                 data={[
                   {key: "1", value: ""},
                   {key: "2", value: "اسلامية"},
-                  {key: "3", value: "عربي"},
+                  {key: "3", value: "قواعد"},
                   {key: "4", value: "اقتصاد"},
                   {key: "5", value: "رياضيات"},
                   {key: "6", value: "احياء"},
@@ -267,7 +278,7 @@ const AddContnet = () => {
                 ]}
                 save="value"
                 boxStyles={{
-                  width: 100,
+                  width: 90,
                   backgroundColor: "#f5f5f5",
                   borderColor: "#f5f5f5",
                   marginVertical: 15,
@@ -279,7 +290,40 @@ const AddContnet = () => {
                   zIndex: 10,
                   top: 50,
                   backgroundColor: "#f5f5f5",
-                  width: 100,
+                  width: 90,
+                  alignItems: "center",
+                }}
+              />
+              <SelectList
+                setSelected={val => setUnit(val)}
+                data={[
+                  {key: "1", value: ""},
+                  {key: "2", value: "1"},
+                  {key: "3", value: "2"},
+                  {key: "4", value: "3"},
+                  {key: "5", value: "4"},
+                  {key: "6", value: "5"},
+                  {key: "7", value: "6"},
+                  {key: "8", value: "7"},
+                  {key: "9", value: "8"},
+                  {key: "10", value: "9"},
+                  {key: "11", value: "10"},
+                ]}
+                save="value"
+                boxStyles={{
+                  width: 90,
+                  backgroundColor: "#f5f5f5",
+                  borderColor: "#f5f5f5",
+                  marginVertical: 15,
+                }}
+                placeholder="الفصل"
+                search={false}
+                dropdownStyles={{
+                  position: "absolute",
+                  zIndex: 10,
+                  top: 50,
+                  backgroundColor: "#f5f5f5",
+                  width: 90,
                   alignItems: "center",
                 }}
               />

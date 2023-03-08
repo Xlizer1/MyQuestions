@@ -53,25 +53,10 @@ const SideMenuView = props => {
               style={{
                 height: 30,
                 resizeMode: "contain",
-                opacity: 0.5,
                 marginTop: 8,
               }}
             />
             <Text style={styles.menuText}>الرئيسية</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.menuContent}
-            onPress={() => navigation.navigate("Questions")}>
-            <Image
-              source={require("../../assets/search.png")}
-              style={{
-                height: 25,
-                resizeMode: "contain",
-                marginTop: 9,
-                opacity: 0.5,
-              }}
-            />
-            <Text style={styles.menuText}>الاسئلة</Text>
           </TouchableOpacity>
           {!admin ? (
             <></>
@@ -84,7 +69,6 @@ const SideMenuView = props => {
                 style={{
                   height: 30,
                   resizeMode: "contain",
-                  opacity: 0.5,
                   marginTop: 8,
                 }}
               />
@@ -97,7 +81,6 @@ const SideMenuView = props => {
               style={{
                 height: 30,
                 resizeMode: "contain",
-                opacity: 0.5,
                 marginTop: 8,
               }}
             />
@@ -109,7 +92,6 @@ const SideMenuView = props => {
               style={{
                 height: 30,
                 resizeMode: "contain",
-                opacity: 0.5,
                 marginTop: 8,
               }}
             />
@@ -130,7 +112,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   menuContent: {
-    flexDirection: "row",
+    flexDirection: "row-reverse",
     justifyContent: "space-around",
     margin: 5,
     paddingVertical: 10,
@@ -140,5 +122,7 @@ const styles = StyleSheet.create({
     width: 150,
     textAlign: "left",
     marginTop: 10,
+    color: "#000",
+    fontWeight: "900",
   },
 });

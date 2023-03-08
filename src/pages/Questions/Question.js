@@ -2,6 +2,7 @@ import React, {useState, useEffect, useContext} from "react";
 import {StyleSheet, Text, View, TouchableOpacity} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {Context} from "../../context/Provider";
+import {Shadow} from "react-native-shadow-2";
 
 const Question = ({item}) => {
   const navigation = useNavigation();
@@ -19,28 +20,34 @@ const Question = ({item}) => {
   }, []);
 
   return (
-    <View
-      style={{backgroundColor: "#f5f5f5", borderRadius: 21, marginBottom: 10}}>
-      <TouchableOpacity style={styles.question} onPress={questionDetails}>
-        <Text style={styles.ques}>{item.title}</Text>
-        <Text style={styles.ans}>{item.answer}</Text>
-        <View style={styles.border}></View>
-        <Text style={styles.yesr}>
-          {item.year} | {item.turn} | {item.material}
-        </Text>
-      </TouchableOpacity>
-      {admin ? (
-        <View style={styles.AdminButtons}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => deleteQuestion(item._id)}>
-            <Text style={{fontSize: 18, fontWeight: "bold"}}>حذف</Text>
-          </TouchableOpacity>
-        </View>
-      ) : (
-        <></>
-      )}
-    </View>
+    <Shadow
+      distance={0}
+      startColor={"#000"}
+      endColor={"#000"}
+      offset={[-10, 10]}
+      style={{margin: 7, width: 370}}>
+      <View style={{backgroundColor: "#f5f5f5"}}>
+        <TouchableOpacity style={styles.question} onPress={questionDetails}>
+          <Text style={styles.ques}>{item.title}</Text>
+          <Text style={styles.ans}>{item.answer}</Text>
+          <View style={styles.border}></View>
+          <Text style={styles.yesr}>
+            {item.year.map(y => ` ${y}` + " |")} | {item.material}
+          </Text>
+        </TouchableOpacity>
+        {admin ? (
+          <View style={styles.AdminButtons}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => deleteQuestion(item._id)}>
+              <Text style={{fontSize: 18, fontWeight: "bold"}}>حذف</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <></>
+        )}
+      </View>
+    </Shadow>
   );
 };
 
@@ -48,17 +55,15 @@ export default Question;
 
 const styles = StyleSheet.create({
   question: {
-    width: "100%",
     backgroundColor: "#f5f5f5",
     padding: 15,
-    borderRadius: 10,
+    borderWidth: 2,
   },
   ques: {
     color: "black",
     fontSize: 10,
     direction: "ltr",
     textAlign: "right",
-    width: "100%",
   },
   ans: {
     color: "black",
@@ -87,9 +92,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#FF4A4A",
     width: "100%",
     height: 30,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
     justifyContent: "center",
     alignItems: "center",
+    borderWidth: 2,
   },
 });
