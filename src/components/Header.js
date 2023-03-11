@@ -37,13 +37,13 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   menuButton: {
-    marginRight: 25,
     width: 40,
+    marginLeft: 10,
   },
   logo: {
     width: 100,
     height: 100,
-    marginLeft: 20,
+    marginRight: 10,
     marginTop: 10,
   },
 });

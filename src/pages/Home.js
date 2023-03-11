@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  Dimensions,
 } from "react-native";
 import {Shadow} from "react-native-shadow-2";
 
@@ -17,13 +18,13 @@ const Home = () => {
   return (
     <View style={styles.container}>
       <Header />
-      <View style={{width: 370, marginVertical: 10}}>
+      <View style={{width: 370, marginVertical: "8%"}}>
         <Shadow
           distance={0}
           startColor={"#000"}
           endColor={"#000"}
-          offset={[-3, 13]}
-          style={{height: 50, marginBottom: 10}}>
+          offset={[-3, 4]}
+          style={{height: 50}}>
           <View style={styles.search}>
             <Text
               style={{
@@ -38,13 +39,18 @@ const Home = () => {
         </Shadow>
       </View>
       <ScrollView>
-        <View style={{width: "100%", alignItems: "center"}}>
+        <View
+          style={{
+            width: "100%",
+            alignItems: "center",
+            marginBottom: "8%",
+          }}>
           <View
             style={{
               flexDirection: "row-reverse",
               justifyContent: "space-around",
               width: 390,
-              marginTop: 10,
+              marginBottom: "8%",
             }}>
             <Shadow
               distance={0}
@@ -64,7 +70,7 @@ const Home = () => {
                   </Text>
                   <Image
                     source={require("../../assets/Subjects/Islamic.png")}
-                    style={{width: 40, resizeMode: "contain", marginRight: 15}}
+                    style={{width: 40, resizeMode: "contain", marginLeft: 15}}
                   />
                 </View>
               </TouchableOpacity>
@@ -86,11 +92,11 @@ const Home = () => {
                 <View style={styles.subject}>
                   <Text
                     style={{fontSize: 20, fontWeight: "900", color: "#000"}}>
-                    عربي
+                    قواعد
                   </Text>
                   <Image
                     source={require("../../assets/Subjects/Arabic.png")}
-                    style={{width: 40, resizeMode: "contain", marginRight: 15}}
+                    style={{width: 40, resizeMode: "contain", marginLeft: 15}}
                   />
                 </View>
               </TouchableOpacity>
@@ -99,9 +105,9 @@ const Home = () => {
           <View
             style={{
               flexDirection: "row-reverse",
-              marginTop: 20,
               justifyContent: "space-around",
               width: 390,
+              marginBottom: "8%",
             }}>
             <Shadow
               distance={0}
@@ -124,7 +130,7 @@ const Home = () => {
                   </Text>
                   <Image
                     source={require("../../assets/Subjects/English.png")}
-                    style={{width: 40, resizeMode: "contain", marginRight: 15}}
+                    style={{width: 40, resizeMode: "contain", marginLeft: 15}}
                   />
                 </View>
               </TouchableOpacity>
@@ -150,7 +156,7 @@ const Home = () => {
                   </Text>
                   <Image
                     source={require("../../assets/Subjects/Economy.png")}
-                    style={{width: 40, resizeMode: "contain", marginRight: 15}}
+                    style={{width: 40, resizeMode: "contain", marginLeft: 15}}
                   />
                 </View>
               </TouchableOpacity>
@@ -159,9 +165,9 @@ const Home = () => {
           <View
             style={{
               flexDirection: "row-reverse",
-              marginTop: 20,
               justifyContent: "space-around",
               width: 390,
+              marginBottom: "8%",
             }}>
             <Shadow
               distance={0}
@@ -184,7 +190,7 @@ const Home = () => {
                   </Text>
                   <Image
                     source={require("../../assets/Subjects/Biology.png")}
-                    style={{width: 40, resizeMode: "contain", marginRight: 15}}
+                    style={{width: 40, resizeMode: "contain", marginLeft: 15}}
                   />
                 </View>
               </TouchableOpacity>
@@ -210,7 +216,7 @@ const Home = () => {
                   </Text>
                   <Image
                     source={require("../../assets/Subjects/Math.png")}
-                    style={{width: 40, resizeMode: "contain", marginRight: 15}}
+                    style={{width: 40, resizeMode: "contain", marginLeft: 15}}
                   />
                 </View>
               </TouchableOpacity>
@@ -219,7 +225,6 @@ const Home = () => {
           <View
             style={{
               flexDirection: "row-reverse",
-              marginVertical: 20,
               justifyContent: "space-around",
               width: 390,
             }}>
@@ -244,7 +249,7 @@ const Home = () => {
                   </Text>
                   <Image
                     source={require("../../assets/Subjects/Physics.png")}
-                    style={{width: 40, resizeMode: "contain", marginRight: 15}}
+                    style={{width: 40, resizeMode: "contain", marginLeft: 15}}
                   />
                 </View>
               </TouchableOpacity>
@@ -284,9 +289,11 @@ const Home = () => {
 
 export default Home;
 
+const windowHeight = Dimensions.get("screen").height;
+
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
+    height: windowHeight,
     display: "flex",
     alignItems: "center",
     paddingTop: 50,
@@ -309,7 +316,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderColor: "#000",
     borderWidth: 2,
-    marginTop: 10,
     flexDirection: "row-reverse",
   },
 });

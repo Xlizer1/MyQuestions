@@ -2,11 +2,11 @@ import {
   StyleSheet,
   Text,
   View,
-  ImageBackground,
   TouchableOpacity,
   Linking,
   ScrollView,
 } from "react-native";
+import {Shadow} from "react-native-shadow-2";
 import Header from "../../components/Header";
 
 export default function Question_Details({route}) {
@@ -23,50 +23,50 @@ export default function Question_Details({route}) {
   };
 
   return (
-    <ImageBackground
-      source={require("../../../assets/Bg.png")}
-      style={"flex:1"}>
-      <View style={styles.container}>
-        <Header />
-        <ScrollView style={styles.content}>
-          <View style={styles.element}>
-            <Text style={styles.header}>السؤال :</Text>
-          </View>
-          <View style={styles.element}>
-            <Text
-              style={{
-                textAlign: "right",
-                color: "#f5f5f5",
-                fontSize: 16,
-                fontWeight: "bold",
-              }}>
-              {item.title}
-            </Text>
-          </View>
-          <View style={styles.border}></View>
-          <View style={styles.element}>
-            <Text style={styles.header}>الاجابة :</Text>
-          </View>
-          <View style={styles.element}>
-            <Text style={{textAlign: "right", color: "#f5f5f5"}}>
-              {item.answer}
-            </Text>
-          </View>
-          <View style={styles.border}></View>
-          <View style={styles.element}>
-            {item.youtubeLink ? (
+    <View style={styles.container}>
+      <Header />
+      <ScrollView style={styles.content}>
+        <View style={styles.element}>
+          <Text style={styles.header}>السؤال :</Text>
+        </View>
+        <View style={styles.element}>
+          <Text
+            style={{
+              color: "#f5f5f5",
+              fontSize: 16,
+              fontWeight: "bold",
+              color: "#000",
+            }}>
+            {item.title}
+          </Text>
+        </View>
+        <View style={styles.border}></View>
+        <View style={styles.element}>
+          <Text style={styles.header}>الاجابة :</Text>
+        </View>
+        <View style={styles.element}>
+          <Text style={{color: "#000"}}>{item.answer}</Text>
+        </View>
+        <View style={styles.border}></View>
+        <View style={styles.element}>
+          {item.youtubeLink ? (
+            <Shadow
+              distance={0}
+              startColor="#000"
+              endColor="#000"
+              offset={[-2, 10]}>
               <TouchableOpacity style={styles.button} onPress={openYoutube}>
-                <Text style={{fontSize: 18, fontWeight: "bold"}}>
+                <Text style={{fontSize: 18, fontWeight: "bold", color: "#000"}}>
                   شاهد شرح السؤال
                 </Text>
               </TouchableOpacity>
-            ) : (
-              <></>
-            )}
-          </View>
-        </ScrollView>
-      </View>
-    </ImageBackground>
+            </Shadow>
+          ) : (
+            <></>
+          )}
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -76,16 +76,16 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     paddingTop: 50,
+    backgroundColor: "#00dd80",
   },
   content: {
     padding: 30,
     width: "100%",
   },
   header: {
-    textAlign: "right",
     fontSize: 24,
     fontWeight: "bold",
-    color: "#f5f5f5",
+    color: "#000",
     marginTop: 10,
   },
   element: {
@@ -94,16 +94,17 @@ const styles = StyleSheet.create({
   },
   border: {
     borderBottomWidth: 1,
-    borderColor: "#f5f5f5",
+    borderColor: "#000",
     padding: 5,
     marginBottom: 20,
+    borderStyle: "dashed",
   },
   button: {
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#fff",
     width: 150,
     height: 60,
-    borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
+    margin: 5,
   },
 });

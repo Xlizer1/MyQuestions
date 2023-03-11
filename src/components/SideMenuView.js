@@ -6,6 +6,7 @@ import {
   Image,
   SafeAreaView,
   TouchableOpacity,
+  Linking,
 } from "react-native";
 
 import {DrawerContentScrollView} from "@react-navigation/drawer";
@@ -75,7 +76,9 @@ const SideMenuView = props => {
               <Text style={styles.menuText}>صفحة الادمن</Text>
             </TouchableOpacity>
           )}
-          <TouchableOpacity style={styles.menuContent}>
+          <TouchableOpacity
+            onPress={() => Linking.openURL("mailto:tommustafa199@gmail.com")}
+            style={styles.menuContent}>
             <Image
               source={require("../../assets/message.png")}
               style={{

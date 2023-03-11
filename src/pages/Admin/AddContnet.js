@@ -38,6 +38,7 @@ const AddContnet = () => {
   const [youtubeLink, setYoutubeLink] = useState("");
 
   const [uploading, setUploading] = useState(false);
+  const [uploadingQuestion, setUploadingQuestion] = useState(false);
 
   const [image, setImage] = useState(null);
 
@@ -134,12 +135,12 @@ const AddContnet = () => {
   };
 
   const addQuestion = async () => {
+    setUploadingQuestion(true);
     const data = {
       title: title,
       answer: answer,
       material: material,
       year: year,
-      turn: turn,
       unit: unit,
       youtubeLink: youtubeLink,
     };
@@ -158,86 +159,77 @@ const AddContnet = () => {
       .catch(e => {
         console.log(e);
       });
+    setUploadingQuestion(false);
   };
 
   return (
-    <ImageBackground
-      source={require("../../../assets/Bg.png")}
-      style={"flex:1"}>
-      <View style={styles.maincontainer}>
-        <Header />
-        <View
-          style={{
-            borderBottomWidth: 2,
-            borderBottomColor: "#f5f5f5",
-            width: 150,
-          }}>
+    <View style={styles.maincontainer}>
+      <Header />
+      <ScrollView style={styles.container}>
+        <View style={styles.inputsContainers}>
           <Text
             style={{
               marginTop: 20,
               marginBottom: 10,
               fontSize: 26,
               fontWeight: "bold",
-              color: "#f5f5f5",
-              textAlign: "center",
+              color: "#000",
             }}>
-            تحميل المحتوى
+            اضافة سؤال
           </Text>
-        </View>
-        <ScrollView style={styles.container}>
-          <View style={styles.inputsContainers}>
-            <Text
-              style={{
-                marginTop: 20,
-                marginBottom: 10,
-                fontSize: 26,
-                fontWeight: "bold",
-                color: "#f5f5f5",
-              }}>
-              اضافة سؤال
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                width: "95%",
-              }}>
-              <MultipleSelectList
-                setSelected={val => setYear(val)}
-                data={[
-                  {key: "1", value: ""},
-                  {key: "2", value: "2022"},
-                  {key: "3", value: "2021"},
-                  {key: "4", value: "2020"},
-                  {key: "5", value: "2019"},
-                  {key: "6", value: "2018"},
-                  {key: "7", value: "2017"},
-                  {key: "8", value: "2016"},
-                  {key: "9", value: "2015"},
-                  {key: "10", value: "2014"},
-                ]}
-                save="value"
-                boxStyles={{
-                  width: 90,
-                  backgroundColor: "#f5f5f5",
-                  borderColor: "#f5f5f5",
-                  marginVertical: 15,
-                  marginRight: 5,
-                }}
-                placeholder="السنة"
-                search={false}
-                dropdownStyles={{
-                  position: "absolute",
-                  zIndex: 10,
-                  top: 50,
-                  backgroundColor: "#f5f5f5",
-                  width: 90,
-                  alignItems: "center",
-                }}
-                badgeStyles={{display: "none"}}
-              />
-              <SelectList
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              width: "95%",
+            }}>
+            <MultipleSelectList
+              setSelected={val => setYear(val)}
+              inputStyles={{fontWeight: "bold", color: "#000"}}
+              checkBoxStyles={{borderColor: "#000"}}
+              labelStyles={{fontWeight: "bold", color: "#000"}}
+              dropdownTextStyles={{fontWeight: "bold", color: "#000"}}
+              data={[
+                {key: "1", value: ""},
+                {key: "2", value: "2022"},
+                {key: "3", value: "2021"},
+                {key: "4", value: "2020"},
+                {key: "5", value: "2019"},
+                {key: "6", value: "2018"},
+                {key: "7", value: "2017"},
+                {key: "8", value: "2016"},
+                {key: "9", value: "2015"},
+                {key: "10", value: "2014"},
+              ]}
+              save="value"
+              boxStyles={{
+                width: 90,
+                height: 50,
+                backgroundColor: "#fff",
+                borderColor: "transparent",
+                color: "#000",
+                borderRadius: 0,
+                marginVertical: 15,
+                marginRight: 5,
+              }}
+              placeholder="السنة"
+              search={false}
+              dropdownStyles={{
+                position: "absolute",
+                zIndex: 10,
+                top: 50,
+                backgroundColor: "#f5f5f5",
+                width: 90,
+                alignItems: "center",
+              }}
+              badgeStyles={{display: "none"}}
+            />
+            {/* <SelectList
                 setSelected={val => setTurn(val)}
+                inputStyles={{fontWeight: "bold", color: "#000"}}
+                checkBoxStyles={{borderColor: "#000"}}
+                labelStyles={{fontWeight: "bold", color: "#000"}}
+                dropdownTextStyles={{fontWeight: "bold", color: "#000"}}
                 data={[
                   {key: "1", value: ""},
                   {key: "2", value: "اول"},
@@ -248,8 +240,11 @@ const AddContnet = () => {
                 save="value"
                 boxStyles={{
                   width: 90,
-                  backgroundColor: "#f5f5f5",
-                  borderColor: "#f5f5f5",
+                  height: 50,
+                  backgroundColor: "#fff",
+                  borderColor: "transparent",
+                  color: "#000",
+                  borderRadius: 0,
                   marginVertical: 15,
                   marginRight: 5,
                 }}
@@ -263,152 +258,174 @@ const AddContnet = () => {
                   width: 90,
                   alignItems: "center",
                 }}
-              />
-              <SelectList
-                setSelected={val => setMaterial(val)}
-                data={[
-                  {key: "1", value: ""},
-                  {key: "2", value: "اسلامية"},
-                  {key: "3", value: "قواعد"},
-                  {key: "4", value: "اقتصاد"},
-                  {key: "5", value: "رياضيات"},
-                  {key: "6", value: "احياء"},
-                  {key: "7", value: "كيمياء"},
-                  {key: "8", value: "فيزياء"},
-                ]}
-                save="value"
-                boxStyles={{
-                  width: 90,
-                  backgroundColor: "#f5f5f5",
-                  borderColor: "#f5f5f5",
-                  marginVertical: 15,
-                }}
-                placeholder="المادة"
-                search={false}
-                dropdownStyles={{
-                  position: "absolute",
-                  zIndex: 10,
-                  top: 50,
-                  backgroundColor: "#f5f5f5",
-                  width: 90,
-                  alignItems: "center",
-                }}
-              />
-              <SelectList
-                setSelected={val => setUnit(val)}
-                data={[
-                  {key: "1", value: ""},
-                  {key: "2", value: "1"},
-                  {key: "3", value: "2"},
-                  {key: "4", value: "3"},
-                  {key: "5", value: "4"},
-                  {key: "6", value: "5"},
-                  {key: "7", value: "6"},
-                  {key: "8", value: "7"},
-                  {key: "9", value: "8"},
-                  {key: "10", value: "9"},
-                  {key: "11", value: "10"},
-                ]}
-                save="value"
-                boxStyles={{
-                  width: 90,
-                  backgroundColor: "#f5f5f5",
-                  borderColor: "#f5f5f5",
-                  marginVertical: 15,
-                }}
-                placeholder="الفصل"
-                search={false}
-                dropdownStyles={{
-                  position: "absolute",
-                  zIndex: 10,
-                  top: 50,
-                  backgroundColor: "#f5f5f5",
-                  width: 90,
-                  alignItems: "center",
-                }}
-              />
-            </View>
-            <TextInput
-              placeholder="السؤال"
-              placeholderTextColor={"#616161"}
-              style={{
+              /> */}
+            <SelectList
+              setSelected={val => setMaterial(val)}
+              inputStyles={{fontWeight: "bold", color: "#000"}}
+              checkBoxStyles={{borderColor: "#000"}}
+              labelStyles={{fontWeight: "bold", color: "#000"}}
+              dropdownTextStyles={{fontWeight: "bold", color: "#000"}}
+              data={[
+                {key: "1", value: ""},
+                {key: "2", value: "اسلامية"},
+                {key: "3", value: "قواعد"},
+                {key: "4", value: "اقتصاد"},
+                {key: "5", value: "رياضيات"},
+                {key: "6", value: "احياء"},
+                {key: "7", value: "كيمياء"},
+                {key: "8", value: "فيزياء"},
+              ]}
+              save="value"
+              boxStyles={{
+                width: 90,
                 height: 50,
-                width: "100%",
-                color: "#616161",
-                borderRadius: 10,
-                backgroundColor: "#f5f5f5",
-                marginBottom: 20,
-                fontSize: 20,
-                textAlign: "right",
-                paddingRight: 10,
-                paddingTop: Platform.OS === "ios" ? 12 : 0,
+                backgroundColor: "#fff",
+                borderColor: "transparent",
+                color: "#000",
+                borderRadius: 0,
+                marginVertical: 15,
+                marginRight: 5,
               }}
-              onChangeText={text => setTitle(text)}
-              value={title}
-              multiline={true}
+              placeholder="المادة"
+              search={false}
+              dropdownStyles={{
+                position: "absolute",
+                zIndex: 10,
+                top: 50,
+                backgroundColor: "#f5f5f5",
+                width: 90,
+                alignItems: "center",
+              }}
             />
-            <TextInput
-              placeholder="الاجابة"
-              placeholderTextColor={"#616161"}
-              style={styles.input}
-              onChangeText={text => setAnswer(text)}
-              value={answer}
+            <SelectList
+              inputStyles={{fontWeight: "bold", color: "#000"}}
+              checkBoxStyles={{borderColor: "#000"}}
+              labelStyles={{fontWeight: "bold", color: "#000"}}
+              dropdownTextStyles={{fontWeight: "bold", color: "#000"}}
+              setSelected={val => setUnit(val)}
+              data={[
+                {key: "1", value: ""},
+                {key: "2", value: "1"},
+                {key: "3", value: "2"},
+                {key: "4", value: "3"},
+                {key: "5", value: "4"},
+                {key: "6", value: "5"},
+                {key: "7", value: "6"},
+                {key: "8", value: "7"},
+                {key: "9", value: "8"},
+                {key: "10", value: "9"},
+                {key: "11", value: "10"},
+              ]}
+              save="value"
+              boxStyles={{
+                width: 90,
+                height: 50,
+                backgroundColor: "#fff",
+                borderColor: "transparent",
+                color: "#000",
+                borderRadius: 0,
+                marginVertical: 15,
+                marginRight: 5,
+              }}
+              placeholder="الفصل"
+              search={false}
+              dropdownStyles={{
+                position: "absolute",
+                zIndex: 10,
+                top: 50,
+                backgroundColor: "#f5f5f5",
+                width: 90,
+                alignItems: "center",
+              }}
             />
-            <TextInput
-              placeholder="رابط اليوتيوب"
-              placeholderTextColor={"#616161"}
-              style={styles.input}
-              onChangeText={text => setYoutubeLink(text)}
-              value={youtubeLink}
-            />
-            <TouchableOpacity style={styles.button1} onPress={addQuestion}>
-              <Text style={{fontWeight: "bold", fontSize: 18}}>
+          </View>
+          <TextInput
+            placeholder="السؤال"
+            placeholderTextColor={"#616161"}
+            style={{
+              height: 50,
+              width: "100%",
+              color: "#616161",
+              backgroundColor: "#f5f5f5",
+              marginBottom: 20,
+              fontSize: 20,
+              textAlign: "right",
+              paddingRight: 10,
+              paddingTop: Platform.OS === "ios" ? 12 : 0,
+            }}
+            onChangeText={text => setTitle(text)}
+            value={title}
+          />
+          <TextInput
+            placeholder="الاجابة"
+            placeholderTextColor={"#616161"}
+            style={styles.input}
+            onChangeText={text => setAnswer(text)}
+            value={answer}
+          />
+          <TextInput
+            placeholder="رابط اليوتيوب"
+            placeholderTextColor={"#616161"}
+            style={styles.input}
+            onChangeText={text => setYoutubeLink(text)}
+            value={youtubeLink}
+          />
+          <TouchableOpacity
+            style={[styles.button1, {width: 120}]}
+            onPress={addQuestion}>
+            {!uploadingQuestion ? (
+              <Text style={{fontWeight: "bold", fontSize: 18, color: "#000"}}>
                 إضافة السؤال
               </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.question}>
-            <Text
-              style={{
-                marginTop: 20,
-                marginBottom: 10,
-                fontSize: 26,
-                fontWeight: "bold",
-                color: "#f5f5f5",
-                textAlign: "center",
-              }}>
-              إضافة خبر
-            </Text>
-            {image && (
-              <Image
-                source={{uri: image}}
-                style={{width: 170, height: 200, alignSelf: "center"}}
-              />
-            )}
-            <TouchableOpacity onPress={pickImage} style={styles.button2}>
-              <Text style={{textAlign: "center"}}>إختيار صورة</Text>
-            </TouchableOpacity>
-            <TextInput
-              placeholder="العنوان"
-              placeholderTextColor={"#616161"}
-              style={styles.input}
-              onChangeText={text => setNews(text)}
-              value={news}
-              multiline={true}
-            />
-            {!uploading ? (
-              <TouchableOpacity style={styles.button1} onPress={addNews}>
-                <Text style={{fontWeight: "bold", fontSize: 18}}>
-                  إضافة الخبر
-                </Text>
-              </TouchableOpacity>
             ) : (
               <ActivityIndicator size={"small"} color="black" />
             )}
-          </View>
-        </ScrollView>
-      </View>
-    </ImageBackground>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.question}>
+          <Text
+            style={{
+              marginBottom: 10,
+              fontSize: 26,
+              fontWeight: "bold",
+              color: "#000",
+              textAlign: "center",
+            }}>
+            إضافة خبر
+          </Text>
+          {image && (
+            <Image
+              source={{uri: image}}
+              style={{width: 170, height: 200, alignSelf: "center"}}
+            />
+          )}
+          <TouchableOpacity onPress={pickImage} style={styles.button2}>
+            <Text style={{textAlign: "center", color: "#000"}}>
+              إختيار صورة
+            </Text>
+          </TouchableOpacity>
+          <TextInput
+            placeholder="العنوان"
+            placeholderTextColor={"#616161"}
+            style={styles.input}
+            onChangeText={text => setNews(text)}
+            value={news}
+            multiline={true}
+          />
+          <TouchableOpacity
+            style={[styles.button1, {width: 100}]}
+            onPress={addNews}>
+            {!uploading ? (
+              <Text style={{fontWeight: "bold", fontSize: 18, color: "#000"}}>
+                إضافة الخبر
+              </Text>
+            ) : (
+              <ActivityIndicator size={"small"} color="black" />
+            )}
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -420,22 +437,21 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     paddingTop: 50,
+    backgroundColor: "#00dd80",
   },
   container: {
     width: "95%",
   },
   inputsContainers: {
     marginVertical: 20,
-    borderRadius: 10,
-    borderBottomColor: "#f5f5f5",
-    borderBottomWidth: 1,
+    borderBottomColor: "#000",
+    borderBottomWidth: 3,
     alignItems: "center",
   },
   input: {
     height: 50,
     width: "100%",
     color: "#616161",
-    borderRadius: 10,
     backgroundColor: "#f5f5f5",
     marginBottom: 20,
     fontSize: 20,
@@ -444,16 +460,14 @@ const styles = StyleSheet.create({
   },
   button1: {
     marginVertical: 20,
-    backgroundColor: "#14FF9C",
+    backgroundColor: "#fff",
     padding: 10,
-    borderRadius: 10,
     alignSelf: "center",
   },
   button2: {
     marginVertical: 20,
-    backgroundColor: "#14FF9C",
+    backgroundColor: "#fff",
     padding: 10,
-    borderRadius: 10,
     alignSelf: "center",
     width: "95%",
   },

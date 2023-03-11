@@ -8,10 +8,13 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  Keyboard,
 } from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {Context} from "../context/Provider";
 import Spinner from "react-native-loading-spinner-overlay/lib";
+import {TouchableWithoutFeedback} from "react-native-gesture-handler";
+import {Shadow} from "react-native-shadow-2";
 
 const Register = () => {
   const navigation = useNavigation();
@@ -27,52 +30,58 @@ const Register = () => {
   };
 
   return (
-    <ImageBackground source={require("../../assets/Bg.png")} style={"flex:1"}>
+    <TouchableWithoutFeedback
+      onPress={Keyboard.dismiss}
+      style={styles.container}>
       <Spinner visible={isLoading} />
-      <ScrollView style={styles.container}>
-        <Image source={require("../../assets/Logo.png")} style={styles.logo} />
-        <View style={styles.mainView}>
-          <Text
-            style={{
-              fontSize: 32,
-              fontWeight: "bold",
-              marginBottom: 30,
-              color: "#f5f5f5",
-              alignSelf: "center",
-            }}>
-            تسجيل
-          </Text>
-          <TextInput
-            placeholder="الأسم الاول"
-            placeholderTextColor={"#f5f5f5"}
-            onChangeText={text => setFirstName(text)}
-            style={styles.input}
-            value={firstName}
-          />
-          <TextInput
-            placeholder="الأسم الاخير"
-            placeholderTextColor={"#f5f5f5"}
-            onChangeText={text => setLastName(text)}
-            style={styles.input}
-            value={lastName}
-          />
-          <TextInput
-            placeholder="البريد الالكتروني"
-            placeholderTextColor={"#f5f5f5"}
-            onChangeText={text => setEmail(text)}
-            style={styles.input}
-            value={email}
-          />
-          <TextInput
-            placeholder="كلمة المرور"
-            placeholderTextColor={"#f5f5f5"}
-            onChangeText={text => setPassword(text)}
-            style={styles.input}
-            value={password}
-            secureTextEntry={true}
-          />
+      <Image source={require("../../assets/Logo.png")} style={styles.logo} />
+      <View style={styles.mainView}>
+        <Text
+          style={{
+            fontSize: 32,
+            fontWeight: "bold",
+            marginBottom: 30,
+            color: "#000",
+            alignSelf: "center",
+          }}>
+          تسجيل
+        </Text>
+        <TextInput
+          placeholder="الأسم الاول"
+          placeholderTextColor={"#000"}
+          onChangeText={text => setFirstName(text)}
+          style={styles.input}
+          value={firstName}
+        />
+        <TextInput
+          placeholder="الأسم الاخير"
+          placeholderTextColor={"#000"}
+          onChangeText={text => setLastName(text)}
+          style={styles.input}
+          value={lastName}
+        />
+        <TextInput
+          placeholder="البريد الالكتروني"
+          placeholderTextColor={"#000"}
+          onChangeText={text => setEmail(text)}
+          style={styles.input}
+          value={email}
+        />
+        <TextInput
+          placeholder="كلمة المرور"
+          placeholderTextColor={"#000"}
+          onChangeText={text => setPassword(text)}
+          style={styles.input}
+          value={password}
+          secureTextEntry={true}
+        />
+        <Shadow
+          distance={0}
+          startColor="#000"
+          endColor="#000"
+          offset={[85, 40]}
+          style={styles.button}>
           <TouchableOpacity
-            style={styles.button}
             onPress={async () => {
               await register(firstName, lastName, email, password);
               navigation.navigate("Login");
@@ -80,22 +89,22 @@ const Register = () => {
             }}>
             <Text style={styles.buttonText}>تسجيل</Text>
           </TouchableOpacity>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              alignSelf: "center",
-            }}>
-            <Text
-              style={{fontWeight: "bold", marginRight: 3}}
-              onPress={navigateToLogin}>
-              تسجيل الدخول
-            </Text>
-            <Text>لديك حساب؟</Text>
-          </View>
+        </Shadow>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            alignSelf: "center",
+          }}>
+          <Text>لديك حساب؟</Text>
+          <Text
+            style={{fontWeight: "bold", marginLeft: 3}}
+            onPress={navigateToLogin}>
+            تسجيل الدخول
+          </Text>
         </View>
-      </ScrollView>
-    </ImageBackground>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -105,6 +114,8 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     paddingTop: 50,
+    backgroundColor: "#00dd80",
+    justifyContent: "center",
   },
   logo: {
     width: 150,
@@ -119,8 +130,8 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
     width: "100%",
-    color: "#f5f5f5",
-    borderBottomColor: "#f5f5f5",
+    color: "#000",
+    borderBottomColor: "#000",
     borderBottomWidth: 1,
     marginBottom: 20,
     fontSize: 20,
@@ -129,16 +140,17 @@ const styles = StyleSheet.create({
   button: {
     width: 150,
     height: 50,
-    backgroundColor: "#14FF9C",
-    borderRadius: 10,
+    backgroundColor: "#fff",
     marginTop: 35,
     marginBottom: 25,
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
+    borderWidth: 2,
+    borderColor: "#000",
   },
   buttonText: {
-    color: "#40514E",
+    color: "#000",
     fontWeight: "bold",
     fontSize: 20,
     alignSelf: "center",

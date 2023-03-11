@@ -63,6 +63,7 @@ export default Provider = ({children}) => {
   const logout = async () => {
     setIsLoading(true);
     await AsyncStorage.removeItem("userInfo");
+    setUserInfo({});
     setIsLoading(false);
   };
 
@@ -218,7 +219,7 @@ export default Provider = ({children}) => {
 
   useEffect(() => {
     isLoggedIn();
-  }, []);
+  }, [userInfo]);
 
   return (
     <Context.Provider

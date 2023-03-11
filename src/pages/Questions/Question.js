@@ -24,7 +24,7 @@ const Question = ({item}) => {
       distance={0}
       startColor={"#000"}
       endColor={"#000"}
-      offset={[-10, 10]}
+      offset={[2, 11]}
       style={{margin: 7, width: 370}}>
       <View style={{backgroundColor: "#f5f5f5"}}>
         <TouchableOpacity style={styles.question} onPress={questionDetails}>
@@ -63,12 +63,10 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 10,
     direction: "ltr",
-    textAlign: "right",
   },
   ans: {
     color: "black",
     fontSize: 12,
-    textAlign: "right",
     direction: "ltr",
     marginTop: 10,
   },
@@ -76,7 +74,6 @@ const styles = StyleSheet.create({
     color: "black",
     fontSize: 10,
     direction: "ltr",
-    textAlign: "right",
     marginTop: 10,
   },
   border: {
