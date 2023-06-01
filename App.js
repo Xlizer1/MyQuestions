@@ -1,10 +1,7 @@
 import { Image, StyleSheet, View } from "react-native";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import * as eva from "@eva-design/eva";
 import { ApplicationProvider } from "@ui-kitten/components";
 import { NavigationContainer } from "@react-navigation/native";
-import Questions from "./screens/Questions";
-import AddQuestion from "./screens/AddQuestion";
 import {
   useFonts,
   Cairo_200ExtraLight,
@@ -15,8 +12,6 @@ import {
   Cairo_900Black,
 } from "@expo-google-fonts/cairo";
 import AppContainer from "./AppContainer";
-
-const Tab = createMaterialTopTabNavigator();
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -38,25 +33,8 @@ export default function App() {
         <View style={styles.container}>
           <Image source={require("./assets/Logo.png")} style={styles.logo} />
         </View>
-        {/* <Questions /> */}
-        {/* <Tab.Navigator
-          screenOptions={{
-            tabBarActiveTintColor: "#fff",
-            tabBarInactiveTintColor: "gray",
-            swipeEnabled: false,
-            lazy: true,
-            tabBarContentContainerStyle: {
-              backgroundColor: "#27374D",
-            },
-            tabBarLabelStyle: {
-              fontFamily: "Cairo_700Bold",
-            },
-          }}
-        >
-          <Tab.Screen name="الاسئلة" component={Questions} />
-          <Tab.Screen name="اضافة سؤال" component={AddQuestion} />
-        </Tab.Navigator> */}
-        <AppContainer />
+        <Questions />
+        {/* <AppContainer /> */}
       </NavigationContainer>
     </ApplicationProvider>
   );
@@ -75,3 +53,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
+
+//admin project_id : 3024a8b8-fb25-4976-9480-14b0375ce75f
+//user project_id : 2c2182d3-2ac6-4646-b481-bf2805a7277e
