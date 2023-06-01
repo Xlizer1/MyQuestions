@@ -14,6 +14,7 @@ import {
   Cairo_700Bold,
   Cairo_900Black,
 } from "@expo-google-fonts/cairo";
+import AppContainer from "./AppContainer";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -38,7 +39,7 @@ export default function App() {
           <Image source={require("./assets/Logo.png")} style={styles.logo} />
         </View>
         {/* <Questions /> */}
-        <Tab.Navigator
+        {/* <Tab.Navigator
           screenOptions={{
             tabBarActiveTintColor: "#fff",
             tabBarInactiveTintColor: "gray",
@@ -54,7 +55,8 @@ export default function App() {
         >
           <Tab.Screen name="الاسئلة" component={Questions} />
           <Tab.Screen name="اضافة سؤال" component={AddQuestion} />
-        </Tab.Navigator>
+        </Tab.Navigator> */}
+        <AppContainer />
       </NavigationContainer>
     </ApplicationProvider>
   );
@@ -67,8 +69,8 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   logo: {
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 100,
     marginLeft: 20,
     marginTop: 10,
   },
