@@ -282,7 +282,6 @@ export default Questions = () => {
               value={search_text}
               placeholder="بحث"
               onChangeText={handelSearch}
-              multiline
               style={{
                 backgroundColor: "#DDE6ED",
                 height: 60,
@@ -291,6 +290,7 @@ export default Questions = () => {
                 fontFamily: "Cairo_700Bold",
                 fontSize: 18,
               }}
+              onSubmitEditing={() => refetch(0, 1)}
             />
           </View>
           <TouchableOpacity
