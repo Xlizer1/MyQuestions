@@ -105,7 +105,7 @@ const QuestionCard = ({
           );
         })}
       </View>
-      {/* <View
+      <View
         style={{
           flexDirection: "row",
           columnGap: 5,
@@ -142,7 +142,7 @@ const QuestionCard = ({
         >
           <Entypo name="edit" size={24} color="#fff" />
         </TouchableOpacity>
-      </View> */}
+      </View>
     </View>
   );
 };

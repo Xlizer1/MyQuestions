@@ -89,7 +89,7 @@ export default Questions = () => {
     );
 
     if (result?.data?.data?.changedRows === 1) {
-      Alert.alert("", "تم حذف السؤال");
+      Alert.alert("", "تم تعديل السؤال");
       getQuestions();
     } else {
       Alert.alert("", "حدث خطأ ما !");
@@ -196,6 +196,12 @@ export default Questions = () => {
               getQuestions();
             }
             setRefreshing(false);
+          },
+        },
+        {
+          text: "لا",
+          onPress: async () => {
+            return;
           },
         },
       ]

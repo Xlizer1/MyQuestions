@@ -33,8 +33,8 @@ export default function App() {
         <View style={styles.container}>
           <Image source={require("./assets/Logo.png")} style={styles.logo} />
         </View>
-        <Questions />
-        {/* <AppContainer /> */}
+        {/* <Questions /> */}
+        <AppContainer />
       </NavigationContainer>
     </ApplicationProvider>
   );
