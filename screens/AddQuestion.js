@@ -70,7 +70,19 @@ export default AddQuestion = () => {
       unit_id: unitIndex,
     });
 
-    setLoading(false);
+    console.log(result);
+
+    if (result.status === true && result.data.data.affectedRows == 1) {
+      setLoading(false);
+      Alert.alert("", "تم اضافة السؤال");
+    } else if (result?.status == false && result.data === "Network Error") {
+      setLoading(false);
+      Alert.alert("", "لا يوجد اتصال بالشبكة!");
+      console.log(result);
+    } else {
+      setLoading(false);
+      Alert.alert("", "حدث خطأ ما!");
+    }
   };
 
   const clearObj = () => {

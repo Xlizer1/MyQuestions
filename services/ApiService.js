@@ -26,7 +26,13 @@ const getQuestions = async (params) => {
       return { status: false, error: true, errorCode: 1 };
     }
   } catch (error) {
-    console.log(error?.message);
+    return {
+      fromAPI: false,
+      status: false,
+      data: error?.message,
+      error: true,
+      errorCode: 0,
+    };
   }
 };
 
@@ -139,7 +145,13 @@ const addQuestion = async (obj) => {
       return { status: false, error: true, errorCode: 1 };
     }
   } catch (error) {
-    console.log(error?.message);
+    return {
+      fromAPI: false,
+      status: false,
+      data: error?.message,
+      error: true,
+      errorCode: 0,
+    };
   }
 };
 
@@ -168,7 +180,13 @@ const updateQuestion = async (obj, id) => {
       return { status: false, error: true, errorCode: 1 };
     }
   } catch (error) {
-    console.log(error?.message);
+    return {
+      fromAPI: false,
+      status: false,
+      data: error?.message,
+      error: true,
+      errorCode: 0,
+    };
   }
 };
 
@@ -196,7 +214,13 @@ const deleteQuestion = async (id) => {
       return { status: false, error: true, errorCode: 1 };
     }
   } catch (error) {
-    console.log(error?.message);
+    return {
+      fromAPI: false,
+      status: false,
+      data: error?.message,
+      error: true,
+      errorCode: 0,
+    };
   }
 };
 

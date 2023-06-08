@@ -25,7 +25,7 @@ export default Questions = () => {
   const [pageSize, setPageSize] = useState(10);
   const [search_text, setSearch_text] = useState("");
   const [year, setYear] = useState(null);
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState(true);
   const [loading, setLoading] = useState(false);
   const [totalRows, setTotalRows] = useState(null);
   const [unitIndex, setUnitIndex] = useState(null);
@@ -37,7 +37,7 @@ export default Questions = () => {
   const [turnsList, setTurnsList] = useState([]);
   const [unitsList, setUnitsList] = useState([]);
 
-  const { width } = Dimensions.get("screen");
+  const { width, height } = Dimensions.get("screen");
 
   const [showEditQuestion, setShowEditQuestion] = useState(false);
   const [question, setQuestion] = useState(null);
@@ -49,6 +49,7 @@ export default Questions = () => {
   const [showYearsAndTurns, setShowYearsAndTurns] = useState(false);
   const [loadingEdit, setLoadingEdit] = useState(false);
   const [selectedQuestion, setSelectedQuestion] = useState({});
+  const [noNetwork, setNoNetwork] = useState(false);
 
   const years = [
     { id: 0, name: 2014 },
@@ -103,6 +104,7 @@ export default Questions = () => {
   const clearObj = () => {
     setQuestion(null);
     setAnswer(null);
+    youtubeLink(null);
     setUnitIndexEdit(null);
     setSubjectIndexEdit(null);
     setYearsAndTurns([]);
@@ -126,20 +128,21 @@ export default Questions = () => {
 
   const getQuestions = async () => {
     setLoading(true);
-    setRefreshing(true);
     const result = await AppFunctions.GetQuestions({
       page: pageNumber,
       page_size: pageSize,
     });
 
     if (result?.status == true) {
+      setNoNetwork(false);
       setData(result?.data?.data?.data);
       setTotalRows(result?.data?.data?.totalRows);
-    } else {
+    } else if (result?.status == false && result.data === "Network Error") {
+      setNoNetwork(true);
       console.log(result);
     }
-    setRefreshing(false);
     setLoading(false);
+    setRefreshing(false);
   };
 
   const getSubjects = async () => {
@@ -259,6 +262,13 @@ export default Questions = () => {
     getSubjects();
     getTurns();
     getUnits();
+    setRefreshing(false);
+
+    const interval = setInterval(getQuestions, 5000); // Fetch data every 5 seconds
+
+    return () => {
+      clearInterval(interval); // Clear the interval on component unmount
+    };
   }, []);
 
   return (
@@ -311,7 +321,13 @@ export default Questions = () => {
             </View>
           </TouchableOpacity>
         </View>
-        {!data.length && !loading ? (
+        <ScrollView
+          scrollEnabled={false}
+          style={{}}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
           <View
             style={{
               flex: 1,
@@ -319,47 +335,74 @@ export default Questions = () => {
               alignItems: "center",
               flexDirection: "row",
               columnGap: 10,
+              height: height - 275,
             }}
           >
-            <Text
-              style={{
-                fontSize: 20,
-                fontFamily: "Cairo_700Bold",
-                color: "#fff",
-              }}
-            >
-              لا يوجد بيانات
-            </Text>
-            <MaterialCommunityIcons
-              name="server-network-off"
-              size={24}
-              color="white"
-            />
-          </View>
-        ) : (
-          <FlatList
-            data={data}
-            keyExtractor={(item, index) => index}
-            renderItem={(item) => {
-              return (
-                <QuestionCard
-                  item={item.item}
-                  subjects={subjectsList}
-                  turns={turnsList}
-                  units={unitsList}
-                  deleteQuestion={deleteQuestion}
-                  handelShowEdit={handelShowEdit}
+            {noNetwork ? (
+              <>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontFamily: "Cairo_700Bold",
+                    color: "#fff",
+                  }}
+                >
+                  تأكد من اتصالك بالانترنت
+                </Text>
+                <MaterialCommunityIcons
+                  name="network-strength-off"
+                  size={24}
+                  color="white"
                 />
-              );
-            }}
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }
-            onEndReached={() => {
-              if (data.length < totalRows) refetch(1, 0);
-            }}
-          />
-        )}
+                {console.log("no network")}
+              </>
+            ) : !data.length && !loading ? (
+              <>
+                {console.log("no data")}
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontFamily: "Cairo_700Bold",
+                    color: "#fff",
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    name="server-network-off"
+                    size={24}
+                    color="white"
+                  />
+                  لا يوجد بيانات
+                </Text>
+              </>
+            ) : (
+              <FlatList
+                data={data}
+                keyExtractor={(item, index) => index}
+                renderItem={(item) => {
+                  return (
+                    <QuestionCard
+                      item={item.item}
+                      subjects={subjectsList}
+                      turns={turnsList}
+                      units={unitsList}
+                      deleteQuestion={deleteQuestion}
+                      handelShowEdit={handelShowEdit}
+                    />
+                  );
+                }}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                  />
+                }
+                onEndReached={() => {
+                  if (data.length < totalRows) refetch(1, 0);
+                }}
+              />
+            )}
+          </View>
+        </ScrollView>
       </View>
       <Modal
         isVisible={showFilterBox}
@@ -543,7 +586,7 @@ export default Questions = () => {
         >
           <ScrollView>
             <TextInput
-              value={question ? question : selectedQuestion.question}
+              value={question != null ? question : selectedQuestion.question}
               placeholder="السؤال"
               onChangeText={(e) => setQuestion(e)}
               multiline
@@ -558,7 +601,7 @@ export default Questions = () => {
               }}
             />
             <TextInput
-              value={answer ? answer : selectedQuestion.answer}
+              value={answer != null ? answer : selectedQuestion.answer}
               placeholder="الاجابة"
               onChangeText={(e) => setAnswer(e)}
               multiline
@@ -573,7 +616,9 @@ export default Questions = () => {
               }}
             />
             <TextInput
-              value={youtubeLink ? youtubeLink : selectedQuestion.video_link}
+              value={
+                youtubeLink != null ? youtubeLink : selectedQuestion.video_link
+              }
               placeholder="رابط الفيديو"
               onChangeText={(e) => setYoututbeLink(e)}
               style={{
@@ -957,8 +1002,6 @@ export default Questions = () => {
     </View>
   );
 };
-
-const { width } = Dimensions.get("screen");
 
 const styles = StyleSheet.create({
   container: {
