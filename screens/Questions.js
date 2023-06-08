@@ -263,9 +263,12 @@ export default Questions = () => {
     getTurns();
     getUnits();
     setRefreshing(false);
-
-    const interval = setInterval(getQuestions, 5000); // Fetch data every 5 seconds
-
+    const interval = setInterval(() => {
+      getQuestions();
+      getSubjects();
+      getTurns();
+      getUnits(); // Fetch data at regular intervals (e.g., every 5 seconds)
+    }, 5000);
     return () => {
       clearInterval(interval); // Clear the interval on component unmount
     };
@@ -356,7 +359,7 @@ export default Questions = () => {
                 />
                 {console.log("no network")}
               </>
-            ) : !data.length && !loading ? (
+            ) : !data.length && !refreshing ? (
               <>
                 {console.log("no data")}
                 <Text
@@ -366,13 +369,13 @@ export default Questions = () => {
                     color: "#fff",
                   }}
                 >
-                  <MaterialCommunityIcons
-                    name="server-network-off"
-                    size={24}
-                    color="white"
-                  />
                   لا يوجد بيانات
                 </Text>
+                <MaterialCommunityIcons
+                  name="server-network-off"
+                  size={24}
+                  color="white"
+                />
               </>
             ) : (
               <FlatList
