@@ -142,7 +142,6 @@ export default Questions = () => {
       console.log(result);
     }
     setLoading(false);
-    setRefreshing(false);
   };
 
   const getSubjects = async () => {
@@ -263,15 +262,6 @@ export default Questions = () => {
     getTurns();
     getUnits();
     setRefreshing(false);
-    const interval = setInterval(() => {
-      getQuestions();
-      getSubjects();
-      getTurns();
-      getUnits(); // Fetch data at regular intervals (e.g., every 5 seconds)
-    }, 5000);
-    return () => {
-      clearInterval(interval); // Clear the interval on component unmount
-    };
   }, []);
 
   return (
@@ -341,7 +331,9 @@ export default Questions = () => {
               height: height - 275,
             }}
           >
-            {noNetwork ? (
+            {!data.length && loading ? (
+              <ActivityIndicator size="large" color="white" />
+            ) : !data.length && !loading && noNetwork ? (
               <>
                 <Text
                   style={{
@@ -357,11 +349,9 @@ export default Questions = () => {
                   size={24}
                   color="white"
                 />
-                {console.log("no network")}
               </>
-            ) : !data.length && !refreshing ? (
+            ) : !data.length && !loading && !noNetwork ? (
               <>
-                {console.log("no data")}
                 <Text
                   style={{
                     fontSize: 20,
