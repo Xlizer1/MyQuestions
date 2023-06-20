@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 
@@ -10,13 +16,19 @@ const QuestionCard = ({
   handelShowEdit,
 }) => {
   const [parsedYearsAndTurn, setParsedYearsAndTurns] = useState([]);
-  let subject = subjects?.find((subject) => subject.id === item?.subject_id);
-  let unit = units?.find((unit) => unit.id === item?.unit_id);
+  let subject = subjects?.find((subject) => subject?.id === item?.subject_id);
+  let unit = units?.find((unit) => unit?.id === item?.unit_id);
 
   const parse = () => {
-    let rowYearsAndTurn = item.yearsAndTurns;
+    let rowYearsAndTurn = item?.yearsAndTurns;
     let parsedYearsAndTurn = JSON.parse(rowYearsAndTurn);
     setParsedYearsAndTurns(parsedYearsAndTurn);
+  };
+
+  const openYoutube = () => {
+    Linking.canOpenURL(item?.video_link).then(() => {
+      Linking.openURL(item?.video_link);
+    });
   };
 
   useEffect(() => {
@@ -109,39 +121,71 @@ const QuestionCard = ({
         style={{
           flexDirection: "row",
           columnGap: 5,
-          justifyContent: "flex-end",
+          justifyContent: item?.video_link ? "space-between" : "flex-end",
+          alignItems: "center",
         }}
       >
-        <TouchableOpacity
+        {item?.video_link ? (
+          <TouchableOpacity
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#7ebd77",
+              padding: 5,
+              borderRadius: 5,
+            }}
+            onPress={openYoutube}
+          >
+            <Text
+              style={{
+                fontFamily: "Cairo_700Bold",
+                color: "#fff",
+              }}
+            >
+              شاهد شرح السؤال
+            </Text>
+          </TouchableOpacity>
+        ) : (
+          <></>
+        )}
+        <View
           style={{
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "#FF543D",
-            borderRadius: 5,
-            width: 60,
-            height: 35,
-          }}
-          onPress={() => {
-            deleteQuestion(item?.id);
+            flexDirection: "row",
+            columnGap: 5,
+            justifyContent: "flex-end",
           }}
         >
-          <AntDesign name="delete" size={24} color="#fff" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "#27374D",
-            borderRadius: 5,
-            width: 60,
-            height: 35,
-          }}
-          onPress={() => {
-            handelShowEdit(item);
-          }}
-        >
-          <Entypo name="edit" size={24} color="#fff" />
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#FF543D",
+              borderRadius: 5,
+              width: 60,
+              height: 35,
+            }}
+            onPress={() => {
+              deleteQuestion(item?.id);
+            }}
+          >
+            <AntDesign name="delete" size={24} color="#fff" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#27374D",
+              borderRadius: 5,
+              width: 60,
+              height: 35,
+            }}
+            onPress={() => {
+              handelShowEdit(item);
+            }}
+          >
+            <Entypo name="edit" size={24} color="#fff" />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

@@ -88,6 +88,7 @@ export default AddQuestion = () => {
   const clearObj = () => {
     setQuestion(null);
     setAnswer(null);
+    setYoututbeLink("");
     setUnitIndex(null);
     setSubjectIndex(null);
     setYearsAndTurns([]);

@@ -27,6 +27,8 @@ export default Questions = () => {
   const [year, setYear] = useState(null);
   const [refreshing, setRefreshing] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [canceling, setCanceling] = useState(false);
+  const [searching, setSearching] = useState(false);
   const [totalRows, setTotalRows] = useState(null);
   const [unitIndex, setUnitIndex] = useState(null);
   const [subjectIndex, setSubjectIndex] = useState(null);
@@ -104,7 +106,7 @@ export default Questions = () => {
   const clearObj = () => {
     setQuestion(null);
     setAnswer(null);
-    youtubeLink(null);
+    setYoututbeLink("");
     setUnitIndexEdit(null);
     setSubjectIndexEdit(null);
     setYearsAndTurns([]);
@@ -137,11 +139,12 @@ export default Questions = () => {
       setNoNetwork(false);
       setData(result?.data?.data?.data);
       setTotalRows(result?.data?.data?.totalRows);
-    } else if (result?.status == false && result.data === "Network Error") {
+    } else if (result?.status == false && result?.data === "Network Error") {
       setNoNetwork(true);
       console.log(result);
     }
     setLoading(false);
+    setCanceling(false);
   };
 
   const getSubjects = async () => {
@@ -235,10 +238,12 @@ export default Questions = () => {
       setData(() => [...data, ...result?.data?.data?.data]);
       setTotalRows(result?.data?.data?.totalRows);
       setRefreshing(false);
+      setSearching(false);
     } else {
       setData(result?.data?.data?.data);
       setTotalRows(result?.data?.data?.totalRows);
       setRefreshing(false);
+      setSearching(false);
     }
   };
 
@@ -314,13 +319,7 @@ export default Questions = () => {
             </View>
           </TouchableOpacity>
         </View>
-        <ScrollView
-          scrollEnabled={false}
-          style={{}}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
-        >
+        <ScrollView scrollEnabled={false} nestedScrollEnabled={true}>
           <View
             style={{
               flex: 1,
@@ -331,42 +330,78 @@ export default Questions = () => {
               height: height - 275,
             }}
           >
-            {!data.length && loading ? (
+            {!data?.length && loading ? (
               <ActivityIndicator size="large" color="white" />
-            ) : !data.length && !loading && noNetwork ? (
-              <>
-                <Text
+            ) : !data?.length && !loading && noNetwork ? (
+              <ScrollView
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                  />
+                }
+              >
+                <View
                   style={{
-                    fontSize: 20,
-                    fontFamily: "Cairo_700Bold",
-                    color: "#fff",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    paddingTop: 220,
+                    columnGap: 10,
                   }}
                 >
-                  تأكد من اتصالك بالانترنت
-                </Text>
-                <MaterialCommunityIcons
-                  name="network-strength-off"
-                  size={24}
-                  color="white"
-                />
-              </>
-            ) : !data.length && !loading && !noNetwork ? (
-              <>
-                <Text
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      fontFamily: "Cairo_700Bold",
+                      color: "#fff",
+                    }}
+                  >
+                    تأكد من اتصالك بالانترنت
+                  </Text>
+                  <MaterialCommunityIcons
+                    name="network-strength-off"
+                    size={24}
+                    color="white"
+                  />
+                </View>
+              </ScrollView>
+            ) : !data?.length && !loading && !noNetwork ? (
+              <ScrollView
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                  />
+                }
+              >
+                <View
                   style={{
-                    fontSize: 20,
-                    fontFamily: "Cairo_700Bold",
-                    color: "#fff",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                    paddingTop: 220,
+                    columnGap: 10,
                   }}
                 >
-                  لا يوجد بيانات
-                </Text>
-                <MaterialCommunityIcons
-                  name="server-network-off"
-                  size={24}
-                  color="white"
-                />
-              </>
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      fontFamily: "Cairo_700Bold",
+                      color: "#fff",
+                    }}
+                  >
+                    لا يوجد بيانات
+                  </Text>
+                  <MaterialCommunityIcons
+                    name="server-network-off"
+                    size={24}
+                    color="white"
+                  />
+                </View>
+              </ScrollView>
             ) : (
               <FlatList
                 data={data}
@@ -390,7 +425,7 @@ export default Questions = () => {
                   />
                 }
                 onEndReached={() => {
-                  if (data.length < totalRows) refetch(1, 0);
+                  if (data?.length < totalRows) refetch(1, 0);
                 }}
               />
             )}
@@ -491,6 +526,7 @@ export default Questions = () => {
           >
             <TouchableOpacity
               onPress={() => {
+                setCanceling(true);
                 setSubjectIndex(null);
                 setTurnIndex(null);
                 setUnitIndex(null);
@@ -509,18 +545,23 @@ export default Questions = () => {
                   alignItems: "center",
                 }}
               >
-                <Text
-                  style={{
-                    fontFamily: "Cairo_700Bold",
-                    color: "#fff",
-                  }}
-                >
-                  الغاء
-                </Text>
+                {!canceling ? (
+                  <Text
+                    style={{
+                      fontFamily: "Cairo_700Bold",
+                      color: "#fff",
+                    }}
+                  >
+                    الغاء
+                  </Text>
+                ) : (
+                  <ActivityIndicator size="small" color="#fff" />
+                )}
               </View>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
+                setSearching(true);
                 setPageNumber(1);
                 setShowFilterBox(false);
                 refetch(0, 1);
@@ -537,7 +578,7 @@ export default Questions = () => {
                   alignItems: "center",
                 }}
               >
-                {!loading ? (
+                {!searching ? (
                   <Text
                     style={{
                       fontFamily: "Cairo_700Bold",
@@ -547,7 +588,7 @@ export default Questions = () => {
                     بحث
                   </Text>
                 ) : (
-                  <ActivityIndicator size="small" color="#000" />
+                  <ActivityIndicator size="small" color="#fff" />
                 )}
               </View>
             </TouchableOpacity>
@@ -610,7 +651,7 @@ export default Questions = () => {
             />
             <TextInput
               value={
-                youtubeLink != null ? youtubeLink : selectedQuestion.video_link
+                youtubeLink != "" ? youtubeLink : selectedQuestion.video_link
               }
               placeholder="رابط الفيديو"
               onChangeText={(e) => setYoututbeLink(e)}
