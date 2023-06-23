@@ -18,7 +18,7 @@ const AppContainer = () => {
           backgroundColor: "#27374D",
         },
         tabBarLabelStyle: {
-          fontFamily: "Cairo_700Bold",
+          fontFamily: "ReadexPro-Regular",
         },
       }}
     >

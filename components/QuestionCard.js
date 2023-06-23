@@ -40,7 +40,7 @@ const QuestionCard = ({
       <View style={{ flexDirection: "row" }}>
         <Text
           style={{
-            fontFamily: "Cairo_700Bold",
+            fontFamily: "ReadexPro-Regular",
             fontSize: 18,
           }}
           ellipsizeMode="tail"
@@ -51,7 +51,7 @@ const QuestionCard = ({
       <View style={{ flexDirection: "row", maxWidth: "100%" }}>
         <Text
           style={{
-            fontFamily: "Cairo_700Bold",
+            fontFamily: "ReadexPro-Regular",
             fontSize: 16,
           }}
         >
@@ -61,7 +61,7 @@ const QuestionCard = ({
       <View style={{ flexDirection: "row", columnGap: 5 }}>
         <Text
           style={{
-            fontFamily: "Cairo_700Bold",
+            fontFamily: "ReadexPro-Regular",
             fontSize: 13,
             color: "#fff",
             backgroundColor: "#526D82",
@@ -73,7 +73,7 @@ const QuestionCard = ({
         </Text>
         <Text
           style={{
-            fontFamily: "Cairo_700Bold",
+            fontFamily: "ReadexPro-Regular",
             fontSize: 13,
             color: "#fff",
             backgroundColor: "#526D82",
@@ -106,7 +106,7 @@ const QuestionCard = ({
             >
               <Text
                 style={{
-                  fontFamily: "Cairo_700Bold",
+                  fontFamily: "ReadexPro-Regular",
                   fontSize: 12,
                   color: "#fff",
                 }}
@@ -138,7 +138,7 @@ const QuestionCard = ({
           >
             <Text
               style={{
-                fontFamily: "Cairo_700Bold",
+                fontFamily: "ReadexPro-Regular",
                 color: "#fff",
               }}
             >

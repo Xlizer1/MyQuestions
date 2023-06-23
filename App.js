@@ -2,25 +2,17 @@ import { Image, StyleSheet, View } from "react-native";
 import * as eva from "@eva-design/eva";
 import { ApplicationProvider } from "@ui-kitten/components";
 import { NavigationContainer } from "@react-navigation/native";
-import {
-  useFonts,
-  Cairo_200ExtraLight,
-  Cairo_300Light,
-  Cairo_400Regular,
-  Cairo_600SemiBold,
-  Cairo_700Bold,
-  Cairo_900Black,
-} from "@expo-google-fonts/cairo";
+import { useFonts } from "@expo-google-fonts/cairo";
 import AppContainer from "./AppContainer";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
-    Cairo_200ExtraLight,
-    Cairo_300Light,
-    Cairo_400Regular,
-    Cairo_600SemiBold,
-    Cairo_700Bold,
-    Cairo_900Black,
+    "ReadexPro-Bold": require("./assets/fonts/ReadexPro-Bold.ttf"),
+    "ReadexPro-ExtraLight": require("./assets/fonts/ReadexPro-ExtraLight.ttf"),
+    "ReadexPro-Light": require("./assets/fonts/ReadexPro-Light.ttf"),
+    "ReadexPro-Medium": require("./assets/fonts/ReadexPro-Medium.ttf"),
+    "ReadexPro-Regular": require("./assets/fonts/ReadexPro-Regular.ttf"),
+    "ReadexPro-SemiBold": require("./assets/fonts/ReadexPro-SemiBold.ttf"),
   });
 
   if (!fontsLoaded) {

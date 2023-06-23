@@ -122,7 +122,7 @@ export default AddQuestion = () => {
           height: 60,
           borderRadius: 7,
           padding: 10,
-          fontFamily: "Cairo_700Bold",
+          fontFamily: "ReadexPro-Regular",
           fontSize: 18,
           marginBottom: 5,
         }}
@@ -137,7 +137,7 @@ export default AddQuestion = () => {
           height: 60,
           borderRadius: 7,
           padding: 10,
-          fontFamily: "Cairo_700Bold",
+          fontFamily: "ReadexPro-Regular",
           fontSize: 18,
           marginBottom: 5,
         }}
@@ -151,7 +151,7 @@ export default AddQuestion = () => {
           height: 60,
           borderRadius: 7,
           padding: 10,
-          fontFamily: "Cairo_700Bold",
+          fontFamily: "ReadexPro-Regular",
           fontSize: 18,
           marginBottom: 5,
         }}
@@ -174,7 +174,7 @@ export default AddQuestion = () => {
         {!yearsAndTurns.length ? (
           <Text
             style={{
-              fontFamily: "Cairo_700Bold",
+              fontFamily: "ReadexPro-Regular",
               color: "grey",
               fontSize: 18,
               padding: 5,
@@ -199,7 +199,7 @@ export default AddQuestion = () => {
               >
                 <Text
                   style={{
-                    fontFamily: "Cairo_700Bold",
+                    fontFamily: "ReadexPro-Regular",
                     fontSize: 12,
                     color: "#fff",
                   }}
@@ -225,7 +225,7 @@ export default AddQuestion = () => {
         >
           <Text
             style={{
-              fontFamily: "Cairo_700Bold",
+              fontFamily: "ReadexPro-Regular",
               fontSize: 18,
             }}
           >
@@ -261,7 +261,7 @@ export default AddQuestion = () => {
         >
           <Text
             style={{
-              fontFamily: "Cairo_700Bold",
+              fontFamily: "ReadexPro-Regular",
               fontSize: 18,
             }}
           >
@@ -314,7 +314,7 @@ export default AddQuestion = () => {
           {!loading ? (
             <Text
               style={{
-                fontFamily: "Cairo_700Bold",
+                fontFamily: "ReadexPro-Regular",
               }}
             >
               اضافة
@@ -347,7 +347,7 @@ export default AddQuestion = () => {
         >
           <Text
             style={{
-              fontFamily: "Cairo_700Bold",
+              fontFamily: "ReadexPro-Regular",
               color: "grey",
               fontSize: 18,
               width: "100%",
@@ -381,7 +381,7 @@ export default AddQuestion = () => {
                 >
                   <Text
                     style={{
-                      fontFamily: "Cairo_700Bold",
+                      fontFamily: "ReadexPro-Regular",
                       fontSize: 12,
                       color: "#fff",
                     }}
@@ -394,7 +394,7 @@ export default AddQuestion = () => {
           </View>
           <Text
             style={{
-              fontFamily: "Cairo_700Bold",
+              fontFamily: "ReadexPro-Regular",
               color: "grey",
               fontSize: 18,
               width: "100%",
@@ -428,7 +428,7 @@ export default AddQuestion = () => {
                 >
                   <Text
                     style={{
-                      fontFamily: "Cairo_700Bold",
+                      fontFamily: "ReadexPro-Regular",
                       fontSize: 12,
                       color: "#fff",
                     }}
@@ -459,7 +459,7 @@ export default AddQuestion = () => {
             >
               <Text
                 style={{
-                  fontFamily: "Cairo_700Bold",
+                  fontFamily: "ReadexPro-Regular",
                   color: "#526D82",
                 }}
               >
@@ -484,7 +484,7 @@ export default AddQuestion = () => {
             >
               <Text
                 style={{
-                  fontFamily: "Cairo_700Bold",
+                  fontFamily: "ReadexPro-Regular",
                   color: "#fff",
                 }}
               >

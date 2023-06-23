@@ -301,7 +301,7 @@ export default Questions = () => {
                 height: 60,
                 borderRadius: 7,
                 padding: 10,
-                fontFamily: "Cairo_700Bold",
+                fontFamily: "ReadexPro-Regular",
                 fontSize: 18,
               }}
               onSubmitEditing={() => refetch(0, 1)}
@@ -354,7 +354,7 @@ export default Questions = () => {
                   <Text
                     style={{
                       fontSize: 20,
-                      fontFamily: "Cairo_700Bold",
+                      fontFamily: "ReadexPro-Regular",
                       color: "#fff",
                     }}
                   >
@@ -389,7 +389,7 @@ export default Questions = () => {
                   <Text
                     style={{
                       fontSize: 20,
-                      fontFamily: "Cairo_700Bold",
+                      fontFamily: "ReadexPro-Regular",
                       color: "#fff",
                     }}
                   >
@@ -453,7 +453,7 @@ export default Questions = () => {
           <View>
             <Text
               style={{
-                fontFamily: "Cairo_700Bold",
+                fontFamily: "ReadexPro-Regular",
                 fontSize: 18,
               }}
             >
@@ -485,7 +485,7 @@ export default Questions = () => {
           <View>
             <Text
               style={{
-                fontFamily: "Cairo_700Bold",
+                fontFamily: "ReadexPro-Regular",
                 fontSize: 18,
               }}
             >
@@ -548,7 +548,7 @@ export default Questions = () => {
                 {!canceling ? (
                   <Text
                     style={{
-                      fontFamily: "Cairo_700Bold",
+                      fontFamily: "ReadexPro-Regular",
                       color: "#fff",
                     }}
                   >
@@ -581,7 +581,7 @@ export default Questions = () => {
                 {!searching ? (
                   <Text
                     style={{
-                      fontFamily: "Cairo_700Bold",
+                      fontFamily: "ReadexPro-Regular",
                       color: "#fff",
                     }}
                   >
@@ -629,7 +629,7 @@ export default Questions = () => {
                 height: 60,
                 borderRadius: 7,
                 padding: 10,
-                fontFamily: "Cairo_700Bold",
+                fontFamily: "ReadexPro-Regular",
                 fontSize: 18,
                 marginBottom: 5,
               }}
@@ -644,7 +644,7 @@ export default Questions = () => {
                 height: 60,
                 borderRadius: 7,
                 padding: 10,
-                fontFamily: "Cairo_700Bold",
+                fontFamily: "ReadexPro-Regular",
                 fontSize: 18,
                 marginBottom: 5,
               }}
@@ -660,7 +660,7 @@ export default Questions = () => {
                 height: 60,
                 borderRadius: 7,
                 padding: 10,
-                fontFamily: "Cairo_700Bold",
+                fontFamily: "ReadexPro-Regular",
                 fontSize: 18,
                 marginBottom: 5,
               }}
@@ -697,7 +697,7 @@ export default Questions = () => {
                       >
                         <Text
                           style={{
-                            fontFamily: "Cairo_700Bold",
+                            fontFamily: "ReadexPro-Regular",
                             fontSize: 12,
                             color: "#fff",
                           }}
@@ -723,7 +723,7 @@ export default Questions = () => {
                       >
                         <Text
                           style={{
-                            fontFamily: "Cairo_700Bold",
+                            fontFamily: "ReadexPro-Regular",
                             fontSize: 12,
                             color: "#fff",
                           }}
@@ -748,7 +748,7 @@ export default Questions = () => {
               >
                 <Text
                   style={{
-                    fontFamily: "Cairo_700Bold",
+                    fontFamily: "ReadexPro-Regular",
                     fontSize: 18,
                   }}
                 >
@@ -788,7 +788,7 @@ export default Questions = () => {
               >
                 <Text
                   style={{
-                    fontFamily: "Cairo_700Bold",
+                    fontFamily: "ReadexPro-Regular",
                     fontSize: 18,
                   }}
                 >
@@ -845,7 +845,7 @@ export default Questions = () => {
                 {!loadingEdit ? (
                   <Text
                     style={{
-                      fontFamily: "Cairo_700Bold",
+                      fontFamily: "ReadexPro-Regular",
                     }}
                   >
                     تعديل
@@ -877,7 +877,7 @@ export default Questions = () => {
               >
                 <Text
                   style={{
-                    fontFamily: "Cairo_700Bold",
+                    fontFamily: "ReadexPro-Regular",
                     color: "grey",
                     fontSize: 18,
                     width: "100%",
@@ -913,7 +913,7 @@ export default Questions = () => {
                       >
                         <Text
                           style={{
-                            fontFamily: "Cairo_700Bold",
+                            fontFamily: "ReadexPro-Regular",
                             fontSize: 12,
                             color: "#fff",
                           }}
@@ -926,7 +926,7 @@ export default Questions = () => {
                 </View>
                 <Text
                   style={{
-                    fontFamily: "Cairo_700Bold",
+                    fontFamily: "ReadexPro-Regular",
                     color: "grey",
                     fontSize: 18,
                     width: "100%",
@@ -962,7 +962,7 @@ export default Questions = () => {
                       >
                         <Text
                           style={{
-                            fontFamily: "Cairo_700Bold",
+                            fontFamily: "ReadexPro-Regular",
                             fontSize: 12,
                             color: "#fff",
                           }}
@@ -995,7 +995,7 @@ export default Questions = () => {
                   >
                     <Text
                       style={{
-                        fontFamily: "Cairo_700Bold",
+                        fontFamily: "ReadexPro-Regular",
                         color: "#526D82",
                       }}
                     >
@@ -1020,7 +1020,7 @@ export default Questions = () => {
                   >
                     <Text
                       style={{
-                        fontFamily: "Cairo_700Bold",
+                        fontFamily: "ReadexPro-Regular",
                         color: "#fff",
                       }}
                     >
