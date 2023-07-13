@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "أسئلتي - إدارة",
-    "slug": "myquestions_mobile_admin",
+    "name": "أسئلتي",
+    "slug": "myquestions_mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/admin_icon.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "backgroundColor": "#27374D",
     "splash": {
@@ -18,17 +18,17 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-admin_icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#27374D27374D"
       },
-      "package": "com.xlizer1.myquestions_mobile_admin"
+      "package": "com.xlizer1.myquestions_mobile"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "3024a8b8-fb25-4976-9480-14b0375ce75f"
+        "projectId": "2c2182d3-2ac6-4646-b481-bf2805a7277e"
       }
     }
   }

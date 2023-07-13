@@ -319,118 +319,107 @@ export default Questions = () => {
             </View>
           </TouchableOpacity>
         </View>
-        <ScrollView scrollEnabled={false} nestedScrollEnabled={true}>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "row",
-              columnGap: 10,
-              height: height - 275,
-            }}
-          >
-            {!data?.length && loading ? (
-              <ActivityIndicator size="large" color="white" />
-            ) : !data?.length && !loading && noNetwork ? (
-              <ScrollView
-                refreshControl={
-                  <RefreshControl
-                    refreshing={refreshing}
-                    onRefresh={onRefresh}
-                  />
-                }
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "row",
+            columnGap: 10,
+            height: height - 275,
+          }}
+        >
+          {!data?.length && loading ? (
+            <ActivityIndicator size="large" color="white" />
+          ) : !data?.length && !loading && noNetwork ? (
+            <ScrollView
+              refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              }
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                  paddingTop: 220,
+                  columnGap: 10,
+                }}
               >
-                <View
+                <Text
                   style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    paddingTop: 220,
-                    columnGap: 10,
+                    fontSize: 20,
+                    fontFamily: "ReadexPro-Regular",
+                    color: "#27374D",
                   }}
                 >
-                  <Text
-                    style={{
-                      fontSize: 20,
-                      fontFamily: "ReadexPro-Regular",
-                      color: "#fff",
-                    }}
-                  >
-                    تأكد من اتصالك بالانترنت
-                  </Text>
-                  <MaterialCommunityIcons
-                    name="network-strength-off"
-                    size={24}
-                    color="white"
-                  />
-                </View>
-              </ScrollView>
-            ) : !data?.length && !loading && !noNetwork ? (
-              <ScrollView
-                refreshControl={
-                  <RefreshControl
-                    refreshing={refreshing}
-                    onRefresh={onRefresh}
-                  />
-                }
+                  تأكد من اتصالك بالانترنت
+                </Text>
+                <MaterialCommunityIcons
+                  name="network-strength-off"
+                  size={24}
+                  color="white"
+                />
+              </View>
+            </ScrollView>
+          ) : !data?.length && !loading && !noNetwork ? (
+            <ScrollView
+              refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              }
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                  paddingTop: 220,
+                  columnGap: 10,
+                }}
               >
-                <View
+                <Text
                   style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: "100%",
-                    paddingTop: 220,
-                    columnGap: 10,
+                    fontSize: 20,
+                    fontFamily: "ReadexPro-Regular",
+                    color: "#27374D",
                   }}
                 >
-                  <Text
-                    style={{
-                      fontSize: 20,
-                      fontFamily: "ReadexPro-Regular",
-                      color: "#fff",
-                    }}
-                  >
-                    لا يوجد بيانات
-                  </Text>
-                  <MaterialCommunityIcons
-                    name="server-network-off"
-                    size={24}
-                    color="white"
+                  لا يوجد بيانات
+                </Text>
+                <MaterialCommunityIcons
+                  name="server-network-off"
+                  size={24}
+                  color="white"
+                />
+              </View>
+            </ScrollView>
+          ) : (
+            <FlatList
+              data={data}
+              keyExtractor={(item, index) => index}
+              renderItem={(item) => {
+                return (
+                  <QuestionCard
+                    item={item.item}
+                    subjects={subjectsList}
+                    turns={turnsList}
+                    units={unitsList}
+                    deleteQuestion={deleteQuestion}
+                    handelShowEdit={handelShowEdit}
                   />
-                </View>
-              </ScrollView>
-            ) : (
-              <FlatList
-                data={data}
-                keyExtractor={(item, index) => index}
-                renderItem={(item) => {
-                  return (
-                    <QuestionCard
-                      item={item.item}
-                      subjects={subjectsList}
-                      turns={turnsList}
-                      units={unitsList}
-                      deleteQuestion={deleteQuestion}
-                      handelShowEdit={handelShowEdit}
-                    />
-                  );
-                }}
-                refreshControl={
-                  <RefreshControl
-                    refreshing={refreshing}
-                    onRefresh={onRefresh}
-                  />
-                }
-                onEndReached={() => {
-                  if (data?.length < totalRows) refetch(1, 0);
-                }}
-              />
-            )}
-          </View>
-        </ScrollView>
+                );
+              }}
+              refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+              }
+              onEndReached={() => {
+                if (data?.length < totalRows) refetch(1, 0);
+              }}
+            />
+          )}
+        </View>
       </View>
       <Modal
         isVisible={showFilterBox}
@@ -525,13 +514,13 @@ export default Questions = () => {
             }}
           >
             <TouchableOpacity
-              onPress={() => {
+              onPress={async () => {
                 setCanceling(true);
                 setSubjectIndex(null);
                 setTurnIndex(null);
                 setUnitIndex(null);
+                await getQuestions();
                 setShowFilterBox(false);
-                getQuestions();
               }}
             >
               <View
@@ -699,7 +688,7 @@ export default Questions = () => {
                           style={{
                             fontFamily: "ReadexPro-Regular",
                             fontSize: 12,
-                            color: "#fff",
+                            color: "#27374D",
                           }}
                         >
                           {yearAndTurn}
@@ -725,7 +714,7 @@ export default Questions = () => {
                           style={{
                             fontFamily: "ReadexPro-Regular",
                             fontSize: 12,
-                            color: "#fff",
+                            color: "#27374D",
                           }}
                         >
                           {yearAndTurn}
@@ -915,7 +904,7 @@ export default Questions = () => {
                           style={{
                             fontFamily: "ReadexPro-Regular",
                             fontSize: 12,
-                            color: "#fff",
+                            color: "#27374D",
                           }}
                         >
                           {year?.name}
@@ -964,7 +953,7 @@ export default Questions = () => {
                           style={{
                             fontFamily: "ReadexPro-Regular",
                             fontSize: 12,
-                            color: "#fff",
+                            color: "#27374D",
                           }}
                         >
                           {turn?.name}
@@ -996,7 +985,7 @@ export default Questions = () => {
                     <Text
                       style={{
                         fontFamily: "ReadexPro-Regular",
-                        color: "#526D82",
+                        color: "#fff",
                       }}
                     >
                       اغلاق
@@ -1021,7 +1010,7 @@ export default Questions = () => {
                     <Text
                       style={{
                         fontFamily: "ReadexPro-Regular",
-                        color: "#fff",
+                        color: "#27374D",
                       }}
                     >
                       اضافة
@@ -1042,7 +1031,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#27374D",
     alignItems: "center",
-    padding: 10,
+    paddingHorizontal: 10,
   },
   logo: {
     width: 100,

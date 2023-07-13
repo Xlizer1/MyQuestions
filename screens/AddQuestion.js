@@ -201,7 +201,7 @@ export default AddQuestion = () => {
                   style={{
                     fontFamily: "ReadexPro-Regular",
                     fontSize: 12,
-                    color: "#fff",
+                    color: "#27374D",
                   }}
                 >
                   {yearAndTurn}
@@ -383,7 +383,7 @@ export default AddQuestion = () => {
                     style={{
                       fontFamily: "ReadexPro-Regular",
                       fontSize: 12,
-                      color: "#fff",
+                      color: "#27374D",
                     }}
                   >
                     {year?.name}
@@ -430,7 +430,7 @@ export default AddQuestion = () => {
                     style={{
                       fontFamily: "ReadexPro-Regular",
                       fontSize: 12,
-                      color: "#fff",
+                      color: "#27374D",
                     }}
                   >
                     {turn?.name}
@@ -460,7 +460,7 @@ export default AddQuestion = () => {
               <Text
                 style={{
                   fontFamily: "ReadexPro-Regular",
-                  color: "#526D82",
+                  color: "#fff",
                 }}
               >
                 اغلاق
@@ -485,7 +485,7 @@ export default AddQuestion = () => {
               <Text
                 style={{
                   fontFamily: "ReadexPro-Regular",
-                  color: "#fff",
+                  color: "#27374D",
                 }}
               >
                 اضافة

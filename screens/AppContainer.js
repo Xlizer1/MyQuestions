@@ -8,7 +8,7 @@ export default function AppContainer() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: "#fff",
+        tabBarActiveTintColor: "#27374D",
         tabBarInactiveTintColor: "gray",
         swipeEnabled: true,
         lazy: true,

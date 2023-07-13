@@ -53,6 +53,7 @@ const QuestionCard = ({
           style={{
             fontFamily: "ReadexPro-Regular",
             fontSize: 16,
+            textAlign: "left",
           }}
         >
           الجواب : {item?.answer}
@@ -148,44 +149,6 @@ const QuestionCard = ({
         ) : (
           <></>
         )}
-        <View
-          style={{
-            flexDirection: "row",
-            columnGap: 5,
-            justifyContent: "flex-end",
-          }}
-        >
-          <TouchableOpacity
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#FF543D",
-              borderRadius: 5,
-              width: 60,
-              height: 35,
-            }}
-            onPress={() => {
-              deleteQuestion(item?.id);
-            }}
-          >
-            <AntDesign name="delete" size={24} color="#fff" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#27374D",
-              borderRadius: 5,
-              width: 60,
-              height: 35,
-            }}
-            onPress={() => {
-              handelShowEdit(item);
-            }}
-          >
-            <Entypo name="edit" size={24} color="#fff" />
-          </TouchableOpacity>
-        </View>
       </View>
     </View>
   );

@@ -23,10 +23,12 @@ export default function App() {
     <ApplicationProvider {...eva} theme={eva.light}>
       <NavigationContainer>
         <View style={styles.container}>
-          <Image source={require("./assets/Logo.png")} style={styles.logo} />
+          <Image
+            source={require("./assets/Logo-black.png")}
+            style={styles.logo}
+          />
         </View>
-        {/* <Questions /> */}
-        <AppContainer />
+        <Questions />
       </NavigationContainer>
     </ApplicationProvider>
   );
@@ -34,9 +36,11 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#27374D",
+    backgroundColor: "#DDE6ED",
     alignItems: "center",
     paddingTop: 10,
+    borderBottomEndRadius: 10,
+    borderBottomStartRadius: 10,
   },
   logo: {
     width: 100,
@@ -47,4 +51,3 @@ const styles = StyleSheet.create({
 });
 
 //admin project_id : 3024a8b8-fb25-4976-9480-14b0375ce75f
-//user project_id : 2c2182d3-2ac6-4646-b481-bf2805a7277e
